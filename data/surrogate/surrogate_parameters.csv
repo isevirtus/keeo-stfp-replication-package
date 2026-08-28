@@ -1,0 +1,7 @@
+parameter,value
+w_dom,3.0
+w_eco,1.0
+w_ling,5.0
+w_min,5.0
+w_max,1.0
+sigma_AE,0.15

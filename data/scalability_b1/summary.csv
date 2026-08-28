@@ -1,0 +1,2 @@
+dataset,n_projects,ilp_optimal_certified_count,tie_count,ilp_reported_higher_count,ga_reported_higher_count,mean_signed_difference_pct,mean_absolute_difference_pct,max_absolute_difference_pct,ga_total_time_s,ga_mean_time_per_project_s,ga_mean_time_per_run_s
+B1_k4_time_limited_incumbents,12,0,7,2,3,0.00878,1.174941,4.332014,2140.810299,178.400858,5.946695

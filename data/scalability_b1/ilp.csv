@@ -1,0 +1,13 @@
+projeto,team_size_testado,metodo,modo,status,AT,AC,AE,tempo_s,mip_gap_pct,best_bound,must_dom_ok,must_eco_ok,must_ling_ok,all_must_ok,ilp_sofreu
+P1,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.912698,0.8,0.818783,7209.5,18.5982,0.6745666360450915,True,True,True,True,True
+P2,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.833333,0.9,0.844445,7202.61,10.1351,0.8138727732697824,True,True,True,True,True
+P3,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.81746,0.8,0.80291,7202.49,25.1196,0.6917989999999793,True,True,True,True,True
+P4,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Optimal; B=Feasible (time limit)),0.857143,0.9,0.864286,5390.05,4.4757,0.8142858333333338,True,True,True,True,True
+P5,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Optimal; B=Feasible (time limit)),0.896825,0.833333,0.843915,6923.06,2.2272,0.6071429999999542,True,True,True,True,True
+P6,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.857143,0.766667,0.781746,7218.54,18.5053,0.6150794999999726,True,True,True,True,True
+P7,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.851191,0.9,0.859325,7210.74,11.3145,0.8894178882902103,True,True,True,True,True
+P8,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Optimal; B=Feasible (time limit)),0.849206,0.9,0.857672,6138.29,5.6054,0.8076720833333341,True,True,True,True,True
+P9,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.873016,0.866667,0.867725,7207.63,6.1337,0.6547619999999426,True,True,True,True,True
+P10,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.904762,0.9,0.900794,7209.73,5.5891,0.6547619999999895,True,True,True,True,True
+P11,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.8,0.8,0.8,7209.73,16.5842,0.8521607420929217,True,True,True,True,True
+P12,4,ILP,AE_FULL_EXACT_BINS,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.873016,0.9,0.877513,7205.69,10.323,0.8944123529795095,True,True,True,True,True

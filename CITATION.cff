@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite the associated paper and this repository."
+title: "KEEO-STFP Replication Package"
+type: dataset
+version: 1.0.0
+date-released: 2026-08-28
+repository-code: "https://github.com/isevirtus/keeo-stfp-replication-package"
+authors:
+  - family-names: Cunha
+    given-names: Felipe
+  - family-names: Perkusich
+    given-names: Mirko
+  - family-names: Albuquerque
+    given-names: Danyllo
+  - family-names: Pinheiro
+    given-names: Rian Gabriel Santos
+  - family-names: Costa
+    given-names: Evandro
+  - family-names: Gorgônio
+    given-names: Kyller
+  - family-names: Perkusich
+    given-names: Angelo
+preferred-citation:
+  type: article
+  title: "Knowledge Engineering for Evolutionary Optimization: From Expert Knowledge to Auditable and Executable Search Models"
+  authors:
+    - family-names: Cunha
+      given-names: Felipe
+    - family-names: Perkusich
+      given-names: Mirko
+    - family-names: Albuquerque
+      given-names: Danyllo
+    - family-names: Pinheiro
+      given-names: Rian Gabriel Santos
+    - family-names: Costa
+      given-names: Evandro
+    - family-names: Gorgônio
+      given-names: Kyller
+    - family-names: Perkusich
+      given-names: Angelo
+  journal: "Knowledge-Based Systems"
+  year: 2026
+  notes: "Manuscript in preparation; update with final bibliographic metadata after publication."
+

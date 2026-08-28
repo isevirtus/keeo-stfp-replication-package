@@ -1,0 +1,4 @@
+phase,validation_design,brier_score,mae_expected_score,n,projects,missing_teacher_rows
+Training (calibration),Controlled exhaustive grid; deterministic-hash training split,0.015526430565907747,0.03827218914807161,20930,,
+Controlled holdout,Held-out controlled scenarios; no parameter readjustment,0.015573546099842399,0.038542252795535394,5320,,
+Real teams (end-to-end),200 sampled teams per project; seed 42,0.032837182500447995,0.04956032787614873,1200,6,0
