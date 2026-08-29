@@ -6,14 +6,16 @@ The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO
 
 ## What this package supports
 
-The public release supports four forms of result inspection and reproduction:
+The public release supports six forms of result inspection and reproduction:
 
-1. **Surrogate fidelity (RQ1):** inspect the reported training, controlled-holdout, and organization-derived end-to-end fidelity summaries.
-2. **Surrogate versus Bayesian Network runtime (RQ2):** recompute descriptive statistics and the reported 19.69x and 21.69x speedups from 100 timing measurements.
-3. **GA versus exact MILP (RQ3):** regenerate the 12 project-level comparisons and aggregate results from 12 MILP executions and 360 GA runs.
-4. **Scalability (RQ4):** inspect the 84 project/team-size comparisons on the 510-profile base and regenerate the 12 project-level comparisons on the 1,000-profile base from 360 corrected GA runs and 12 time-limited MILP runs.
+1. **Semantic traceability:** inspect the eight-construct audit and its aggregate coverage counts.
+2. **Surrogate fidelity (RQ1):** inspect pointwise and decision-level fidelity on training, controlled-holdout, and organization-derived evaluations.
+3. **Surrogate versus Bayesian Network runtime (RQ2):** recompute descriptive statistics and the reported 19.69x and 21.69x speedups from 100 timing measurements.
+4. **GA versus exact MILP (RQ3):** regenerate the 12 project-level comparisons and aggregate results from 12 MILP executions and 360 GA runs.
+5. **Scalability (RQ4):** inspect the 84 project/team-size comparisons on the 510-profile base and regenerate the 12 project-level comparisons on the 1,000-profile base from 360 corrected GA runs and 12 time-limited MILP runs.
+6. **Package integrity:** verify row counts, seeds, comparison conventions, de-identification, and the new traceability and decision-fidelity summaries.
 
-The package is an **analysis-reproduction package**, not yet a fully self-contained end-to-end execution environment. The organization-derived developer profiles, collaboration graph, prediction-level fidelity records, and complete STFP implementation are not included in this public release. Consequently, the supplied scripts can verify and regenerate the reported result tables, while rerunning every optimization and BN evaluation from original organizational inputs requires additional private artifacts.
+The package is an **analysis-reproduction package**, not yet a fully self-contained end-to-end execution environment. The organization-derived developer profiles, collaboration graph, original semantic elicitation records, and complete STFP implementation are not included in this public release. The released decision-fidelity records replace team membership with project-local candidate identifiers. Consequently, the supplied scripts can verify and regenerate the reported result tables, while rerunning every optimization and BN evaluation from original organizational inputs requires additional private artifacts.
 
 ## Quick verification
 
@@ -39,7 +41,13 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 |-- CITATION.cff
 |-- MANIFEST.sha256
 |-- data/
+|   |-- keeo_traceability/
+|   |   |-- semantic_traceability_audit.csv
+|   |   `-- semantic_traceability_summary.csv
 |   |-- surrogate/
+|   |   |-- decision_fidelity_per_team.csv
+|   |   |-- decision_fidelity_by_project.csv
+|   |   |-- decision_fidelity_summary.csv
 |   |   |-- fidelity_summary.csv
 |   |   |-- runtime_raw.csv
 |   |   |-- runtime_summary_by_project.csv
@@ -62,9 +70,11 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 |       `-- synthetic_generation_summary.csv
 |-- docs/
 |   |-- DATA_DICTIONARY.md
-|   `-- ENVIRONMENT.md
+|   |-- ENVIRONMENT.md
+|   `-- SEMANTIC_TRACEABILITY.md
 |-- scripts/
 |   |-- verify_package.py
+|   |-- analyze_decision_fidelity.py
 |   |-- regenerate_tables.py
 |   |-- benchmark_surrogate_vs_bn.py
 |   |-- benchmark_scalability.py
@@ -76,6 +86,14 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 
 ## Data and experiments
 
+### Semantic traceability audit
+
+`data/keeo_traceability/semantic_traceability_audit.csv` records the eight
+elicited constructs and their paths through the semantic, authoritative-model,
+evaluator, optimizer, and recommendation artifacts. The aggregate counts are
+in `semantic_traceability_summary.csv`, and the audit protocol and
+interpretation boundary are documented in `docs/SEMANTIC_TRACEABILITY.md`.
+
 ### RQ1: surrogate fidelity
 
 `data/surrogate/fidelity_summary.csv` contains the three reported evaluations:
@@ -86,7 +104,7 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 | Controlled holdout | 5,320 | 0.0155735 | 0.0385423 |
 | Organization-derived teams | 1,200 | 0.0328372 | 0.0495603 |
 
-The controlled training and holdout partitions come from the same enumerated scenario space. The end-to-end evaluation sampled 200 teams for each of six projects with seed 42. The file contains aggregate metrics; prediction-level BN and surrogate outputs are not part of this release, so these metrics can be inspected and validated against the paper but not recomputed from individual predictions.
+The controlled training and holdout partitions come from the same enumerated scenario space. The end-to-end evaluation sampled 200 teams for each of six projects with seed 42. De-identified prediction-level scores are released in `decision_fidelity_per_team.csv`; project-level ranking, top-k, and regret results are in `decision_fidelity_by_project.csv` and `decision_fidelity_summary.csv`. The analysis script documents how the public files were derived from the private end-to-end evaluator output.
 
 `data/surrogate/surrogate_parameters.csv` reports the calibrated analytical-surrogate parameters used in the study.
 
@@ -230,4 +248,3 @@ Use the metadata in `CITATION.cff`. The paper is currently under preparation for
 ## License
 
 No reuse license has been selected for this initial release. Until the repository owners add one, the contents remain under default copyright. Code and data licensing should be finalized before archival publication.
-

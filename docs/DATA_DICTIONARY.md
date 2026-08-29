@@ -60,7 +60,29 @@
 | `n` | Number of evaluated scenarios or sampled teams. |
 | `missing_teacher_rows` | Teacher evaluations unavailable in the end-to-end set. |
 
+## Decision-level fidelity fields
+
+| Field | Meaning |
+|---|---|
+| `candidate_id` | Project-local de-identified identifier for one sampled candidate team. It does not encode team membership. |
+| `teacher_score` / `surrogate_score` | Expected AE produced by the authoritative BN and analytical surrogate. |
+| `spearman_rho` | Spearman rank correlation between BN and surrogate scores within one project. |
+| `pairwise_order_agreement` | Proportion of non-tied candidate pairs ordered in the same direction by both evaluators. |
+| `top10_overlap_rate` / `top20_overlap_rate` | Intersection divided by 10 or 20 for the evaluator-specific highest-ranked candidate sets. |
+| `shared_top_candidate` | Whether the BN and surrogate maximal-score sets share at least one candidate. |
+| `teacher_regret_surrogate_top` | BN-best score minus the BN score assigned to the surrogate-selected candidate. |
+
+## Semantic traceability fields
+
+| Field | Meaning |
+|---|---|
+| `semantic_definition` | Whether the controlled elicitation record defines the construct's decision meaning. |
+| `five_state_anchors` | Whether VL, L, M, H, and VH are all explicitly anchored. |
+| `authoritative_model_path` | Documented relation from the semantic construct to the authoritative model. |
+| `evaluator_path` | Direct or upstream relation from the construct to the run-time evaluator. |
+| `trace_status` | `direct` for a run-time model input/output or `documented_indirect` for an upstream knowledge source. |
+| `residual_boundary` | Construct or operationalization boundary retained by the audit. |
+
 ## De-identification
 
 Selected-team IDs and project descriptions were removed before publication. `best_team_synthetic_membership.csv` retains only whether a recorded B1 run-best team contained a synthetic profile and the corresponding count.
-

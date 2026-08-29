@@ -1,0 +1,9 @@
+construct,semantic_definition,five_state_anchors,state_characteristics,state_examples,authoritative_model_path,evaluator_path,optimization_path,recommendation_evidence,trace_status,residual_boundary
+DA,yes,yes,yes,yes,DA_to_AT,domain_score_to_AT,AT_to_AE_objective,AT_decomposition,direct,"Executable coverage is narrower than the full semantic rubric"
+ED,yes,yes,yes,yes,ED_to_AT,ecosystem_score_to_AT,AT_to_AE_objective,AT_decomposition,direct,"Executable coverage is narrower than the full semantic rubric"
+LP,yes,yes,yes,yes,LP_to_AT,language_score_to_AT,AT_to_AE_objective,AT_decomposition,direct,"Executable coverage is narrower than the full semantic rubric"
+AT,yes,yes,yes,yes,AT_to_AE,weighted_DA_ED_LP,AE_objective,AT_decomposition,direct,"Recorded technical profiles do not operationalize every property in the AT rubric"
+AC,yes,yes,yes,yes,AC_to_AE,pair_tier_distribution_to_AC,AE_objective,AC_decomposition,direct,"Prior co-participation does not operationalize every property in the AC rubric"
+AE,yes,yes,yes,yes,AE_output,MIXMINMAX_AT_AC,GA_and_MILP_objective,AE_AT_AC_scores,direct,"AE represents conformity to the elicited policy rather than observed project success"
+OSF,yes,yes,yes,yes,OSF_to_pair_compatibility_to_AC,compatibility_graph_upstream,AC_to_AE_objective,AC_decomposition,documented_indirect,"OSF is used to construct compatibility evidence and is not a run-time team-evaluator input"
+SLF,yes,yes,yes,yes,SLF_to_pair_compatibility_to_AC,compatibility_graph_upstream,AC_to_AE_objective,AC_decomposition,documented_indirect,"SLF is used to construct compatibility evidence and is not a run-time team-evaluator input"

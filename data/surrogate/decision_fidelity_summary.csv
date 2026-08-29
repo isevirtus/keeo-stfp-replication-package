@@ -1,0 +1,2 @@
+n_projects,n_candidates,spearman_mean,spearman_min,pairwise_order_agreement_mean,shared_top_candidate_count,top10_overlap_rate_mean,top20_overlap_rate_mean,teacher_regret_mean,teacher_regret_max,teacher_regret_pct_mean,teacher_regret_pct_max
+6,1200,0.793942,0.447632,0.858523,3,0.8,0.775,0.02369,0.060474,7.119495,22.896931

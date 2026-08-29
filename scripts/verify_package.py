@@ -53,6 +53,36 @@ def verify_surrogate() -> None:
     close(float(fidelity["Controlled holdout"]["mae_expected_score"]), 0.038542252795535394, 1e-12)
     close(float(fidelity["Real teams (end-to-end)"]["mae_expected_score"]), 0.04956032787614873, 1e-12)
 
+    per_team = rows("data/surrogate/decision_fidelity_per_team.csv")
+    by_project = rows("data/surrogate/decision_fidelity_by_project.csv")
+    decision = rows("data/surrogate/decision_fidelity_summary.csv")[0]
+    assert len(per_team) == 1200 and len(by_project) == 6
+    assert all("team" not in row for row in per_team)
+    close(float(decision["spearman_mean"]), 0.793942)
+    close(float(decision["spearman_min"]), 0.447632)
+    close(float(decision["pairwise_order_agreement_mean"]), 0.858523)
+    assert int(decision["shared_top_candidate_count"]) == 3
+    close(float(decision["top10_overlap_rate_mean"]), 0.8)
+    close(float(decision["top20_overlap_rate_mean"]), 0.775)
+    close(float(decision["teacher_regret_mean"]), 0.02369)
+    close(float(decision["teacher_regret_max"]), 0.060474)
+
+
+def verify_traceability() -> None:
+    audit = rows("data/keeo_traceability/semantic_traceability_audit.csv")
+    summary = {
+        row["measure"]: (int(row["value"]), int(row["denominator"]))
+        for row in rows("data/keeo_traceability/semantic_traceability_summary.csv")
+    }
+    assert len(audit) == 8
+    assert Counter(row["trace_status"] for row in audit) == {
+        "direct": 6,
+        "documented_indirect": 2,
+    }
+    assert summary["constructs_with_definition"] == (8, 8)
+    assert summary["state_specific_examples"] == (40, 40)
+    assert summary["core_authoritative_model_relations_preserved_in_surrogate"] == (5, 5)
+
 
 def verify_rq3() -> None:
     ilp = rows("data/rq3_exact_vs_ga/ilp.csv")
@@ -126,7 +156,11 @@ def verify_deidentification() -> None:
         re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}"),
     ]
     for path in ROOT.rglob("*"):
-        if not path.is_file() or path.resolve() == Path(__file__).resolve():
+        if (
+            not path.is_file()
+            or path.resolve() == Path(__file__).resolve()
+            or ".git" in path.parts
+        ):
             continue
         content = path.read_text(encoding="utf-8", errors="ignore")
         for pattern in sensitive_patterns:
@@ -136,6 +170,7 @@ def verify_deidentification() -> None:
 
 def main() -> None:
     verify_surrogate()
+    verify_traceability()
     verify_rq3()
     verify_b0_scalability()
     verify_b1_scalability()
