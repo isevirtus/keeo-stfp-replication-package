@@ -2,20 +2,20 @@
 
 Supplementary material for **“Knowledge Engineering for Evolutionary Optimization: From Expert Knowledge to Auditable and Executable Search Models.”**
 
-The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO)** and instantiates it for the Software Team Formation Problem (STFP). This repository contains de-identified experimental results, reference benchmark runners, a synthetic-base generator, a sanitized solver log, and verification scripts.
+The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO)** and instantiates it for the Software Team Formation Problem (STFP). This repository contains de-identified experimental results, reference benchmark runners, a sanitized solver log, and verification scripts.
 
 ## What this package supports
 
 The public release supports six forms of result inspection and reproduction:
 
 1. **Semantic traceability:** inspect the eight-construct audit and its aggregate coverage counts.
-2. **Surrogate fidelity (RQ1):** inspect pointwise and decision-level fidelity on training, controlled-holdout, and organization-derived evaluations.
+2. **Surrogate fidelity (RQ1):** inspect pointwise and decision-level V1 fidelity on training, controlled-holdout, and semisynthetic end-to-end evaluations.
 3. **Surrogate versus Bayesian Network runtime (RQ2):** recompute descriptive statistics and the reported 19.69x and 21.69x speedups from 100 timing measurements.
-4. **GA versus exact MILP (RQ3):** regenerate the 12 project-level comparisons and aggregate results from 12 MILP executions and 360 GA runs.
-5. **Scalability (RQ4):** inspect the 84 project/team-size comparisons on the 510-profile base and regenerate the 12 project-level comparisons on the 1,000-profile base from 360 corrected GA runs and 12 time-limited MILP runs.
+4. **Historical GA versus exact MILP evidence (RQ3 lineage):** regenerate the V1 12-project comparison from 12 MILP executions and 360 GA runs.
+5. **Historical team-size evidence (RQ4 lineage):** inspect the V1 84 project/team-size comparisons on the organization-derived 510-profile base.
 6. **Package integrity:** verify row counts, seeds, comparison conventions, de-identification, and the new traceability and decision-fidelity summaries.
 
-The package is an **analysis-reproduction package**, not yet a fully self-contained end-to-end execution environment. The organization-derived developer profiles, collaboration graph, original semantic elicitation records, and complete STFP implementation are not included in this public release. The released decision-fidelity records replace team membership with project-local candidate identifiers. Consequently, the supplied scripts can verify and regenerate the reported result tables, while rerunning every optimization and BN evaluation from original organizational inputs requires additional private artifacts.
+The package is an **analysis-reproduction package**, not yet a fully self-contained end-to-end execution environment. The organization-derived developer profiles, collaboration graph, original semantic elicitation records, and complete STFP implementation are not included in this public release. The released decision-fidelity records replace team membership with project-local candidate identifiers. Consequently, the supplied scripts can verify and regenerate the released V1 result tables, while rerunning every optimization and BN evaluation from original organizational inputs requires additional private artifacts. The paper's primary V2 optimization results are currently reported as aggregates and are not yet reproducible from run-level files in this release.
 
 ## Quick verification
 
@@ -31,7 +31,7 @@ Expected output:
 All replication-package checks passed.
 ```
 
-The verification covers row counts, seed grids, solver-status interpretation, tie classification, canonical aggregate values, corrected B1 results, synthetic-profile membership flags, and de-identification checks.
+The verification covers row counts, seed grids, solver-status interpretation, tie classification, canonical aggregate values, and de-identification checks.
 
 ## Repository structure
 
@@ -58,16 +58,9 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 |   |   |-- ga_runs.csv
 |   |   |-- comparison.csv
 |   |   `-- summary.csv
-|   |-- scalability_b0/
-|   |   |-- project_level.csv
-|   |   `-- team_size_summary.csv
-|   `-- scalability_b1/
-|       |-- ilp.csv
-|       |-- ga_runs.csv
-|       |-- comparison.csv
-|       |-- summary.csv
-|       |-- best_team_synthetic_membership.csv
-|       `-- synthetic_generation_summary.csv
+|   `-- scalability_b0/
+|       |-- project_level.csv
+|       `-- team_size_summary.csv
 |-- docs/
 |   |-- DATA_DICTIONARY.md
 |   |-- ENVIRONMENT.md
@@ -78,7 +71,6 @@ The verification covers row counts, seed grids, solver-status interpretation, ti
 |   |-- regenerate_tables.py
 |   |-- benchmark_surrogate_vs_bn.py
 |   |-- benchmark_scalability.py
-|   |-- generate_synthetic_bases.py
 |   `-- generate_manifest.py
 `-- solver_logs/
     `-- P2_k12_B0_sanitized.txt
@@ -102,7 +94,7 @@ interpretation boundary are documented in `docs/SEMANTIC_TRACEABILITY.md`.
 |---|---:|---:|---:|
 | Training/calibration | 20,930 | 0.0155264 | 0.0382722 |
 | Controlled holdout | 5,320 | 0.0155735 | 0.0385423 |
-| Organization-derived teams | 1,200 | 0.0328372 | 0.0495603 |
+| Semisynthetic end-to-end teams | 1,200 | 0.0328372 | 0.0495603 |
 
 The controlled training and holdout partitions come from the same enumerated scenario space. The end-to-end evaluation sampled 200 teams for each of six projects with seed 42. De-identified prediction-level scores are released in `decision_fidelity_per_team.csv`; project-level ranking, top-k, and regret results are in `decision_fidelity_by_project.csv` and `decision_fidelity_summary.csv`. The analysis script documents how the public files were derived from the private end-to-end evaluator output.
 
@@ -130,38 +122,19 @@ Caching and early stopping were disabled. A warm-up evaluation of both evaluator
 
 The benchmark used one Python process without explicit parallel evaluation. The operating system did not constrain threads that might be used internally by NumPy or its numerical backend.
 
-### RQ3: GA against a certified exact reference
+### RQ3 lineage: V1 GA against a certified exact reference
 
-`data/rq3_exact_vs_ga/` contains 12 certified MILP solutions and 360 GA runs: seeds 1-30 for each of 12 projects at team size four. The GA best-of-30 reached eight certified optima and remained within 2.26104% on the other four projects. Across all 360 runs, 73 reached a certified optimum within the absolute raw-AE tolerance of `1e-5`.
+`data/rq3_exact_vs_ga/` contains the pre-refinement V1 evidence: 12 certified MILP solutions and 360 GA runs, using seeds 1-30 for each of 12 projects at team size four. The GA best-of-30 reached eight certified optima and remained within 2.26104% on the other four projects. Across all 360 runs, 73 reached a certified optimum within the absolute raw-AE tolerance of `1e-5`. These records preserve evidence lineage; they are not the V2 aggregate result foregrounded in the paper.
 
 The public files omit project descriptions, developer identifiers, selected-team identifiers, and timestamps. These fields are not required to reproduce the reported quality and runtime analyses.
 
-### RQ4: scalability on B0
+### RQ4 lineage: V1 team-size evidence on B0
 
-`data/scalability_b0/project_level.csv` contains 84 project/team-size comparisons: 12 projects for each of `k = 5, 6, 7, 8, 9, 10, 12`. `team_size_summary.csv` contains the aggregates reported in the paper.
+`data/scalability_b0/project_level.csv` contains the pre-refinement V1 evidence: 84 project/team-size comparisons, with 12 projects for each of `k = 5, 6, 7, 8, 9, 10, 12`. `team_size_summary.csv` contains the corresponding historical aggregates. The paper's primary RQ4 result instead uses V2 and `k = 4, ..., 10`; those V2 run-level records are not in the current release.
 
 The MILP certified 83 of 84 instances. The exception is P2 at `k=12`; its sanitized solver output is provided in `solver_logs/P2_k12_B0_sanitized.txt`. Across all B0 instances, 65 comparisons were ties under the raw-AE tolerance, the mean absolute relative difference was approximately 0.3221%, and the maximum was 3.961952%.
 
-Only project-level best-of-30 results are available for this scalability dimension; the 2,520 individual GA run records are not included in the current source material.
-
-### RQ4: scalability on B1
-
-B1 expands B0 from 510 to 1,000 candidate profiles by adding 490 synthetic profiles with seed 42. The generator samples feature-list sizes, feature frequencies, collaboration-edge density, and edge-weight frequencies from B0. The resulting graph contains 37,272 edges and has density 0.074619, compared with 9,685 edges and density 0.074618 on B0.
-
-`data/scalability_b1/` contains the final corrected execution:
-
-- 12 time-limited MILP incumbents;
-- 360 GA runs, seeds 1-30 per project;
-- 7 ties;
-- 2 cases in which the MILP incumbent was higher;
-- 3 cases in which the GA reported value was higher than the time-limited incumbent;
-- mean absolute incumbent difference: 1.174941%;
-- maximum absolute incumbent difference: 4.332014%;
-- total GA time: 2,140.810299 seconds.
-
-None of the 360 recorded run-best teams contained a synthetic profile. `best_team_synthetic_membership.csv` preserves this check without exposing team identifiers. It does not establish that synthetic profiles were never evaluated during a run.
-
-All B1 MILP solutions were feasible but uncertified. Therefore, a GA value above an MILP incumbent is not a value above the unknown optimum. B1 results are comparisons with time-limited incumbents, not optimality comparisons.
+Only project-level best-of-30 results are available for this historical V1 team-size analysis; its 2,520 individual GA run records are not included in the current source material.
 
 ## Regenerating comparison tables
 
@@ -175,16 +148,6 @@ python scripts/regenerate_tables.py \
   --ga-runs data/rq3_exact_vs_ga/ga_runs.csv \
   --dataset-label B0_k4_certified \
   --output-dir reproduced/rq3
-```
-
-B1 scalability:
-
-```bash
-python scripts/regenerate_tables.py \
-  --ilp data/scalability_b1/ilp.csv \
-  --ga-runs data/scalability_b1/ga_runs.csv \
-  --dataset-label B1_k4_time_limited_incumbents \
-  --output-dir reproduced/b1
 ```
 
 The regenerated `comparison.csv` and `summary.csv` files should match their canonical counterparts in `data/`.
@@ -212,8 +175,7 @@ Negative signed differences are preserved: they indicate that the GA reported va
 The following scripts document the executed benchmark logic:
 
 - `benchmark_surrogate_vs_bn.py`: controlled 210-call evaluator benchmark;
-- `benchmark_scalability.py`: parameterized GA/MILP scalability benchmark;
-- `generate_synthetic_bases.py`: B1/B2/B3 profile and graph generator.
+- `benchmark_scalability.py`: parameterized GA/MILP scalability benchmark.
 
 They are included for auditability but are not standalone because they import the complete STFP pipeline and require files that are not public in this release, including the organization-derived candidate base, collaboration graph, target-project definitions, BN evaluator, surrogate evaluator, GA engine, and MILP implementation.
 

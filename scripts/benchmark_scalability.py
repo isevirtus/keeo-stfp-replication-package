@@ -332,8 +332,8 @@ def importar_engine(project_root: Path, base_path: Path, graph_path: Path):
         # and derived structures once, at import time, from a fixed path
         # (Data/base_final.json), independent of this script's --base-final/
         # --graph arguments. Without reloading here, the GA silently keeps
-        # searching the wrong pool whenever a different base (e.g. base_B1.json)
-        # is passed on the ILP side, which is invisible unless AE/team values
+        # searching the wrong pool whenever a different candidate base is
+        # passed on the ILP side, which is invisible unless AE/team values
         # are compared across runs. Reload everything derived from the pool,
         # using the SAME base/graph the ILP side is using.
         mapa, adj, valid_ids = engine._load_grafo(str(graph_path))

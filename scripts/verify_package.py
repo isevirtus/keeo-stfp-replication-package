@@ -118,27 +118,6 @@ def verify_b0_scalability() -> None:
     close(float(by_k[12]["ilp_time_mean_s"]) / float(by_k[5]["ilp_time_mean_s"]), 14.3168, 5e-4)
 
 
-def verify_b1_scalability() -> None:
-    ilp = rows("data/scalability_b1/ilp.csv")
-    ga = rows("data/scalability_b1/ga_runs.csv")
-    comparison = rows("data/scalability_b1/comparison.csv")
-    summary = rows("data/scalability_b1/summary.csv")[0]
-    membership = rows("data/scalability_b1/best_team_synthetic_membership.csv")
-    assert len(ilp) == 12 and len(ga) == 360 and len(comparison) == 12 and len(membership) == 360
-    assert_seed_grid(ga)
-    outcomes = Counter(row["reported_comparison"] for row in comparison)
-    assert outcomes == {
-        "TIE": 7,
-        "ILP_REPORTED_HIGHER": 2,
-        "GA_REPORTED_HIGHER": 3,
-    }
-    close(float(summary["ga_total_time_s"]), 2140.810299)
-    close(float(summary["ga_mean_time_per_run_s"]), 5.946695)
-    close(float(summary["mean_absolute_difference_pct"]), 1.174941)
-    close(float(summary["max_absolute_difference_pct"]), 4.332014)
-    assert all(row["best_team_contains_synthetic_profile"].lower() == "false" for row in membership)
-
-
 def verify_deidentification() -> None:
     forbidden_headers = {"project_name", "equipe", "ilp_team", "ga_best_team", "best_team", "timestamp"}
     for path in (ROOT / "data").rglob("*.csv"):
@@ -173,7 +152,6 @@ def main() -> None:
     verify_traceability()
     verify_rq3()
     verify_b0_scalability()
-    verify_b1_scalability()
     verify_deidentification()
     print("All replication-package checks passed.")
 

@@ -85,4 +85,4 @@
 
 ## De-identification
 
-Selected-team IDs and project descriptions were removed before publication. `best_team_synthetic_membership.csv` retains only whether a recorded B1 run-best team contained a synthetic profile and the corresponding count.
+Selected-team IDs and project descriptions were removed before publication.

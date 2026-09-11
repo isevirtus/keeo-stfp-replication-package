@@ -35,5 +35,4 @@ Explicit Gurobi settings:
 - `Threads=0`, which allowed use of up to the 12 logical processors recorded by the solver
 - presolve, heuristics, cuts, and numerical tolerances: Gurobi defaults
 
-The 7,200-second per-instance budget was divided equally between the two MILP subproblems. GA and MILP were invoked sequentially by the same benchmark runner. The corrected B1 GA executions occurred in a later same-machine session than the retained MILP executions, so B1 absolute runtime values are not paired within one process session.
-
+The 7,200-second per-instance budget was divided equally between the two MILP subproblems. GA and MILP were invoked sequentially by the same benchmark runner.
