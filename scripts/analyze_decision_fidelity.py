@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Analyze ranking- and decision-level fidelity between the BN and surrogate.
 
-The input is the private end-to-end per-team evaluation file. The public
-per-team output replaces team membership with a project-local candidate ID.
-Only the Python standard library is required.
+By default, input is the public six-decimal candidate-score file. The original
+private evaluator format is also supported via --input. Private team membership
+is never exported. Only the Python standard library is required. Recalculation
+from rounded public scores can differ slightly from original-precision results.
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 
+ROOT = Path(__file__).resolve().parents[1]
 PER_TEAM_FIELDS = [
     "project_id",
     "candidate_id",
@@ -140,8 +142,11 @@ def analyze(input_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]
     project_rows: list[dict[str, Any]] = []
     for project_id in sorted(grouped, key=lambda value: int(value[1:])):
         source = grouped[project_id]
-        teacher = [float(row["AE_teacher_mean"]) for row in source]
-        surrogate = [float(row["AE_sur_mean"]) for row in source]
+        public_input = "teacher_score" in source[0]
+        teacher_field = "teacher_score" if public_input else "AE_teacher_mean"
+        surrogate_field = "surrogate_score" if public_input else "AE_sur_mean"
+        teacher = [float(row[teacher_field]) for row in source]
+        surrogate = [float(row[surrogate_field]) for row in source]
         teacher_ranks = average_ranks(teacher)
         surrogate_ranks = average_ranks(surrogate)
         spearman = pearson(teacher_ranks, surrogate_ranks)
@@ -187,7 +192,7 @@ def analyze(input_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]
             public_rows.append(
                 {
                     "project_id": project_id,
-                    "candidate_id": f"{project_id}_T{index:03d}",
+                    "candidate_id": source[index - 1].get("candidate_id", f"{project_id}_T{index:03d}"),
                     "teacher_score": f"{teacher_score:.6f}",
                     "surrogate_score": f"{surrogate_score:.6f}",
                     "absolute_error": f"{abs(teacher_score - surrogate_score):.6f}",
@@ -229,8 +234,10 @@ def analyze(input_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", required=True, type=Path)
-    parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--input", type=Path,
+                        default=ROOT / "data/surrogate/decision_fidelity_per_team.csv")
+    parser.add_argument("--output-dir", type=Path,
+                        default=ROOT / "reproduced/decision_fidelity")
     args = parser.parse_args()
 
     public_rows, project_rows, summary = analyze(args.input)

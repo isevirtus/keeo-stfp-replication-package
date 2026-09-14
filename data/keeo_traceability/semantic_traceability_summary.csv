@@ -5,10 +5,11 @@ constructs_with_state_characteristics,8,8
 constructs_with_state_examples,8,8
 state_specific_characteristic_blocks,40,40
 state_specific_examples,40,40
-constructs_with_end_to_end_trace,8,8
+constructs_with_documented_disposition,8,8
+constructs_with_operational_end_to_end_trace,6,8
 constructs_with_direct_runtime_trace,6,8
-constructs_with_documented_upstream_trace,2,8
-core_authoritative_model_relations_preserved_in_surrogate,5,5
+constructs_with_explicit_non_operational_disposition,2,8
+v1_model_relations_preserved_in_surrogate,5,5
 technology_classification_rules,3,3
 worked_taxonomy_boundary_cases,3,3
 category_refinements_recorded,1,1

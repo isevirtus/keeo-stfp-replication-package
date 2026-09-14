@@ -1,0 +1,2 @@
+# Preserve exact file bytes: MANIFEST.sha256 also covers line endings.
+* -text

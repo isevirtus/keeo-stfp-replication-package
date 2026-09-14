@@ -1,0 +1,2 @@
+stratum,knowledge_version,evidence_level,candidate_pool_size,team_size,projects,ga_runs_per_project,milp_mean_time_per_project_s,ga_mean_time_per_run_s
+k4,V2,reported_aggregate,510,4,12,30,121.0,9.21

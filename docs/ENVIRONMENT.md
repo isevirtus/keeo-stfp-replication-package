@@ -1,8 +1,11 @@
 # Experimental environments
 
-The study used two machines/environments. Runtime values should not be compared across them as if they were paired measurements.
+The study used two machines and version-specific software environments. V1
+and V2 optimization runs used the same reported hardware but different software
+versions. Runtime values must not be compared across versions or machines as
+if they were paired measurements.
 
-## Surrogate-versus-BN benchmark
+## V1 surrogate-versus-BN benchmark (RQ2)
 
 - Windows 10 Pro, 64-bit
 - Intel Core i3-3217U at 1.80 GHz
@@ -18,7 +21,7 @@ Conditions ran in fixed order for each project: surrogate without GA, surrogate 
 
 CPU affinity, background load, and pauses between conditions were not controlled.
 
-## GA/MILP exact comparison and scalability
+## Historical V1 GA/MILP exact comparison and team-size analysis
 
 - Windows 11 Home Single Language, build 26200
 - Intel Core i5-1334U, 10 physical cores and 12 logical processors
@@ -36,3 +39,23 @@ Explicit Gurobi settings:
 - presolve, heuristics, cuts, and numerical tolerances: Gurobi defaults
 
 The 7,200-second per-instance budget was divided equally between the two MILP subproblems. GA and MILP were invoked sequentially by the same benchmark runner.
+
+## V2 GA/MILP comparison on 510 profiles (primary RQ3 and RQ4)
+
+- Windows 11
+- Intel Core i5-1334U
+- 8 GB RAM
+- Python 3.12.14 (reported version; environment lock not yet released)
+- Gurobi 13.0.3 (reported version)
+- Same reported optimization hardware as the earlier runs
+
+The V2 record reports 30 GA runs per project/team-size configuration. At team
+size four, mean times were 121.0 seconds per MILP project and 9.21 seconds per
+GA run. The latter is not the elapsed time for a 30-run batch.
+
+The V2 operating-system build, PuLP version if used, exact software revision,
+solver parameters and time limit, seeds, and thread/load controls have not been
+included with the aggregate results. The V1 settings above must not silently be
+reused as a verified V2 execution record. No pinned V2 environment file is
+provided until these versions and settings can be checked against the original
+execution environment.

@@ -1,0 +1,3 @@
+knowledge_version,evidence_level,original_elicitation_scenarios,preference_relations,satisfied_preference_relations,reported_fit_error,fit_error_definition,calibration_basis
+V1,reported_aggregate,6,14,13,0.00170,not_specified_in_released_record,original_six_moscow_scenarios
+V2,reported_aggregate,6,14,14,0.00353,not_specified_in_released_record,same_original_six_moscow_scenarios

@@ -1,0 +1,16 @@
+component,parameter,value,status,meaning
+interpriority_AT,w_covM,0,reported_rounded,Must coverage coefficient
+interpriority_AT,w_red2M,0.4121,reported_rounded,Must coverage by at least two members
+interpriority_AT,w_red3M,0.2582,reported_rounded,Must coverage by at least three members
+interpriority_AT,w_red4M,0,reported_rounded,Retained for traceability with no extra benefit
+interpriority_AT,w_should,0.2308,reported_rounded,Must-gated Should coverage coefficient
+interpriority_AT,w_could,0.2308,reported_rounded,Must-gated Could coverage coefficient
+interpriority_AT,b,,not_available,Intercept must not be inferred as zero
+interpriority_AT,eta,,not_available,Additional Must coverage multiplier floor
+AT,w_DA,3,reported,Domain adequacy weight
+AT,w_ED,1,reported,Ecosystem adequacy weight
+AT,w_LP,5,reported,Language adequacy weight
+AC,alpha,0.5,reported,Global compression around 0.5
+AC,center,0.5,reported,Fixed point of the compression
+AE,w_min,5,reported,Weight on the lower of AT and AC
+AE,w_max,1,reported,Weight on the higher of AT and AC
