@@ -14,6 +14,7 @@ from pathlib import Path
 
 from generate_manifest import release_files
 from summarize_v2 import load_and_validate
+from analyze_v2_scalability import analyze
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -112,12 +113,15 @@ def verify_traceability() -> None:
 
 def verify_v2() -> None:
     data, _ = load_and_validate()
-    k4, larger = data
+    k4, larger, b1 = data
     close(float(k4["mean_absolute_AE_difference"]), 0.0028)
     close(float(k4["mean_relative_gap_pct"]), 0.3879)
     close(float(k4["max_relative_gap_pct"]), 2.5986)
     assert k4["max_relative_gap_project"] == "P3"
-    close(float(larger["mean_absolute_AE_difference"]), 0.0014)
+    close(float(larger["mean_absolute_AE_difference"]), 0.0012747189285714286, 1e-12)
+    close(float(b1["mean_absolute_AE_difference"]), 0.0029819541666666666, 1e-12)
+    assert int(b1["ga_returned_higher"]) == 1
+    assert int(b1["milp_certified"]) == 0
     assert all(larger[key] == "" for key in
                ("mean_relative_gap_pct", "max_relative_gap_pct", "max_relative_gap_project"))
     refinement = rows("data/v2/refinement_summary.csv")
@@ -138,6 +142,17 @@ def verify_v2() -> None:
         assert float(parameters[name]["value"]) >= 0
     assert float(parameters["w_should"]["value"]) >= float(parameters["w_could"]["value"])
     close(float(parameters["alpha"]["value"]), 0.5)
+
+
+def verify_v2_scalability_artifacts() -> None:
+    pools, summaries, by_k = analyze()
+    def same(actual, expected):
+        assert actual == [{k: str(v) for k, v in row.items()} for row in expected]
+    for pool, records in pools.items():
+        folder = f"data/v2/scalability_{pool}"
+        same(rows(f"{folder}/comparison.csv"), records)
+        same(rows(f"{folder}/summary.csv"), [summaries[pool]])
+    same(rows("data/v2/scalability_b0/team_size_summary.csv"), by_k)
 
 
 def verify_manifest() -> None:
@@ -225,6 +240,7 @@ def main() -> None:
     verify_rq3()
     verify_b0_scalability()
     verify_v2()
+    verify_v2_scalability_artifacts()
     verify_deidentification()
     print("All replication-package checks passed.")
 

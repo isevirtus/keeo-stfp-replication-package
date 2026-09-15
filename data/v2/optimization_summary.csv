@@ -1,3 +1,4 @@
-stratum,knowledge_version,evidence_level,candidate_pool_size,unique_projects,k_min,k_max,configurations,ga_runs_per_configuration,ga_runs,ga_feasible_runs,milp_certified,milp_feasible_uncertified,ga_matches_returned_milp,milp_returned_higher,ga_returned_higher,mean_absolute_AE_difference,mean_relative_gap_pct,max_relative_gap_pct,max_relative_gap_project
-k4,V2,reported_aggregate,510,12,4,4,12,30,360,360,12,0,9,3,0,0.0028,0.3879,2.5986,P3
-k5_to_10,V2,reported_aggregate,510,12,5,10,72,30,2160,2160,70,2,55,17,0,0.0014,,,
+stratum,knowledge_version,evidence_level,candidate_pool_size,unique_projects,k_min,k_max,configurations,ga_runs_per_configuration,ga_runs,ga_feasible_runs,milp_certified,milp_feasible_uncertified,ga_matches_returned_milp,milp_returned_higher,ga_returned_higher,mean_absolute_AE_difference,mean_relative_gap_pct,max_relative_gap_pct,max_relative_gap_project,team_sizes
+k4,V2,reported_aggregate,510,12,4,4,12,30,360,360,12,0,9,3,0,0.0028,0.3879,2.5986,P3,4
+b0_scalability,V2,instance_summary_recomputed,510,12,5,12,84,30,2520,2520,80,4,65,19,0,0.001274718928571428571428571429,,,,5;6;7;8;9;10;12
+b1_scalability,V2,instance_summary_recomputed,1000,12,4,4,12,30,360,360,0,12,9,2,1,0.002981954166666666666666666667,,,,4

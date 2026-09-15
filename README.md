@@ -2,12 +2,12 @@
 
 Supplementary material for **“Knowledge Engineering for Evolutionary Optimization: From Expert Knowledge to Auditable and Executable Search Models.”**
 
-The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.1.0** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, and verification scripts.
+The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.0** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, and verification scripts.
 
 The authoritative artifact is the **knowledge specification**, not the BN. The
 BN is a V1 reference implementation; replacing it with a V1 surrogate is an
 optional representation choice. V2 refines AT and AC independently of that
-choice. The main optimization evidence uses V2 on **510 developer profiles**.
+choice. The main optimization evidence uses V2 on **510 candidates with varying team sizes** and **1,000 candidates at fixed team size four**. These are distinct experiments; the historical V1 1,000-candidate experiment is not included.
 
 ## What this package supports
 
@@ -19,16 +19,17 @@ The public release supports the following forms of result inspection and reprodu
 4. **Historical GA versus exact MILP evidence (RQ3 lineage):** regenerate the V1 12-project comparison from 12 MILP executions and 360 GA runs.
 5. **Historical team-size evidence (RQ4 lineage):** inspect the V1 84 project/team-size comparisons on the organization-derived 510-profile base.
 6. **Knowledge refinement:** inspect the V1-to-V2 AT/AC changes, reported coefficients, and preference-order coverage (13/14 to 14/14).
-7. **Primary V2 optimization evidence (RQ3/RQ4):** regenerate the reported aggregate table for 84 project/team-size configurations, without double-counting the RQ3 baseline.
+7. **Primary V2 optimization evidence (RQ3/RQ4):** inspect the separate 510-candidate size-four baseline; recompute 84 larger-team comparisons on 510 candidates and 12 size-four comparisons on 1,000 candidates.
 8. **Package integrity:** verify released counts, V1 seed grids, comparison conventions, de-identification checks, and SHA-256 checksums.
 
 The package is an **analysis-reproduction package**, not a self-contained
 end-to-end execution environment. Organizational inputs, original semantic
 elicitation records, and the complete STFP implementation are not included.
 V1 includes timing and candidate-score records, plus historical optimization
-records. V2 includes **reported aggregates**, not individual runs or a complete
-evaluator. Regenerating the V2 table verifies arithmetic and presentation; it
-does not independently reproduce the experiment. See the
+records. V2 includes **MILP configuration records and GA configuration summaries**
+for scalability, plus reported baseline and refinement aggregates. It does not
+include individual GA runs or a complete evaluator. The scripts reproduce
+analyses from these records, not the original optimization experiments. See the
 [article-to-artifact map and outstanding artifacts](docs/REPRODUCIBILITY.md).
 
 ## Quick verification
@@ -46,7 +47,7 @@ All replication-package checks passed.
 ```
 
 The verification covers released row counts, V1 seed grids and comparison
-rules, V2 aggregate arithmetic, semantic exclusions, canonical values,
+rules, V2 instance-level classifications, signed differences, timing arithmetic, semantic exclusions, canonical values,
 de-identification checks, and file hashes. Run without Python's `-O` option.
 
 ## Repository structure
@@ -82,7 +83,9 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |       |-- optimization_summary.csv
 |       |-- runtime_summary.csv
 |       |-- refinement_summary.csv
-|       `-- parameters.csv
+|       |-- parameters.csv
+|       |-- scalability_b0/  # V2: 510 candidates, k=5,6,7,8,9,10,12
+|       `-- scalability_b1/  # V2: 1000 candidates, k=4
 |-- docs/
 |   |-- DATA_DICTIONARY.md
 |   |-- ENVIRONMENT.md
@@ -94,6 +97,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |   |-- analyze_decision_fidelity.py
 |   |-- regenerate_tables.py
 |   |-- summarize_v2.py
+|   |-- analyze_v2_scalability.py
 |   |-- benchmark_surrogate_vs_bn.py
 |   |-- benchmark_scalability.py
 |   `-- generate_manifest.py
@@ -168,8 +172,8 @@ The public files omit project descriptions, developer identifiers, selected-team
 `data/scalability_b0/project_level.csv` contains the pre-refinement V1 evidence:
 84 project/team-size comparisons, with 12 projects for each of
 `k = 5, 6, 7, 8, 9, 10, 12`. `team_size_summary.csv` contains the corresponding
-historical aggregates. This is a **different set of 84 configurations** from
-the primary V2 `k=4..10` series. Do not merge or relabel these records as V2.
+historical aggregates. The V2 B0 series now uses the same team-size set, but a different
+knowledge version. Do not merge or relabel the historical observations as V2.
 
 The MILP certified 83 of 84 instances. The exception is P2 at `k=12`; its sanitized solver output is provided in `solver_logs/P2_k12_B0_sanitized.txt`. Across all B0 instances, 65 comparisons were ties under the raw-AE tolerance, the mean absolute relative difference was approximately 0.3221%, and the maximum was 3.961952%.
 
@@ -184,25 +188,46 @@ optimization formulations, and validation evidence. `data/v2/` includes
 reported parameters and the six-scenario preference-order aggregates, with
 unavailable parameters explicitly distinguished from zero.
 
-### Primary RQ3/RQ4: V2 on 510 profiles
+### Primary RQ3/RQ4: V2 baseline and two scalability dimensions
 
-| Team sizes | Configurations | MILP certified | Feasible, uncertified | GA matches returned value | MILP higher | Valid GA runs | Mean absolute AE difference |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| 4 (RQ3 baseline) | 12 | 12 | 0 | 9 | 3 | 360/360 | 0.0028 |
-| 5–10 | 72 | 70 | 2 | 55 | 17 | 2,160/2,160 | 0.0014 |
-| Total | 84 | 82 | 2 | 64 | 20 | 2,520/2,520 | — |
+| Pool / team sizes | Configurations | MILP certified | Feasible, uncertified | GA ties | MILP higher | GA higher | Valid GA runs | Mean absolute AE difference |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 510 / k=4 (RQ3 baseline) | 12 | 12 | 0 | 9 | 3 | 0 | 360/360 | 0.0028 |
+| 510 / k=5,6,7,8,9,10,12 | 84 | 80 | 4 | 65 | 19 | 0 | 2,520/2,520 | 0.00127472 |
+| 1000 / k=4 | 12 | 0 | 12 | 9 | 2 | 1 | 360/360 | 0.00298195 |
 
-These are reported aggregates in `data/v2/optimization_summary.csv`, not
-newly computed run-level results. Both strata use the same 12 projects. GA
-quality uses the best of 30 runs. The GA never exceeded the returned MILP
-value. Matches involving uncertified MILP results cannot be called certified
-optimum hits, and a pooled mean is not inferred from rounded subgroup values.
+The same 12 project contexts recur. The first row remains a **reported
+aggregate**, not newly reconstructed raw data. The two scalability rows are
+**recomputed from released configuration records**. The B0 series excludes
+the RQ3 k=4 baseline and does not contain k=11. Do not pool versions or count
+the baseline twice. The earlier V2 k=5..10 subset is confirmed by the new
+records: 72 configurations, 70 certificates, 55 ties, and mean absolute AE
+difference rounded to 0.0014.
 
-At `k=4`, the mean relative gap to the optimum was 0.3879%; the maximum was
-2.5986% (P3). Mean time was 121.0 s per MILP project versus 9.21 s per single
-GA run (about 13.1×). A sequential 30-run GA batch implies approximately
-276.3 s from that rounded mean, not a 13.1× best-of-30 speedup. The V2 raw
-outputs, exact seeds, and original table-generation pipeline remain outstanding.
+Each scalability folder contains de-identified MILP records, GA summaries
+(best, mean, median, standard deviation, best seed, and timing), and canonical
+derived comparisons. The GA quality comparison always uses **best-of-30**.
+Ties use an absolute tolerance of **1e-5 AE units**, applied before conversion
+to percentages. Differences retain their sign. Of the 65 B0 matches, 63 are
+to certified optima and two to uncertified incumbents.
+
+On B1, **none of the MILP results is certified**. The GA exceeds the returned
+incumbent on P5, trails on P3 and P12, and ties on the other nine projects.
+This does not prove GA optimality. Mean MILP duration is **7,206.04 s**;
+mean total computation for **all 30 GA runs is 276.17 s** (descriptive ratio
+26.09). These are not equal-time budgets or a hardware-controlled speedup
+experiment. The 9.21-s mean single-run GA time must not be attached to
+best-of-30 quality.
+
+The B0 P10/k=8 MILP duration is **14,390.14 s**, above the nominal 7,200-s
+budget. It is retained and flagged, not silently capped or dropped.
+Reported solver bounds/gaps describe internal branch diagnostics and must
+not be used as global AE bounds. See [scalability interpretation and
+data-quality notes](docs/V2_SCALABILITY.md).
+
+The size-four B0 baseline retains mean relative gap 0.3879%, maximum 2.5986%
+(P3), mean MILP time 121.0 s, and mean GA run time 9.21 s. Its approximate
+30-run cost is 276.3 s from the rounded mean, not a recorded batch duration.
 
 ## Regenerating public analyses
 
@@ -212,11 +237,20 @@ Decision fidelity from released candidate-score pairs:
 python scripts/analyze_decision_fidelity.py
 ```
 
-V2 aggregate table (Markdown and LaTeX, written to `reproduced/v2/`):
+V2 baseline/scalability summary (Markdown and LaTeX, `reproduced/v2/`):
 
 ```bash
 python scripts/summarize_v2.py
 ```
+
+V2 configuration-level comparisons, per-size quality, and timing summaries:
+
+```bash
+python scripts/analyze_v2_scalability.py
+```
+
+Outputs go to `reproduced/v2_scalability/` and match the canonical derived
+CSV files under `data/v2/scalability_b0/` and `data/v2/scalability_b1/`.
 
 The historical V1 comparison script uses only the Python standard library and
 applies a single absolute raw-AE tie tolerance of `1e-5`.
@@ -251,9 +285,10 @@ abs(AE_ILP - AE_GA) <= 1e-5
 
 Negative signed differences are preserved: they indicate that the GA reported value exceeded the available MILP value. The sign must not be truncated before aggregation.
 
-The V2 matches are reported aggregate classifications. Their tolerance and
-original classifier must be confirmed with the V2 run-level release; the V1
-script is not evidence that the same classifier was executed for V2.
+The V2 scalability classifier is implemented separately in
+`analyze_v2_scalability.py` with decimal arithmetic over the released scores.
+The size-four B0 baseline remains an aggregate classification; it is not
+recomputed from individual V2 runs.
 
 ## Reference benchmark scripts
 
@@ -276,8 +311,9 @@ This public package intentionally removes:
 
 Project identifiers in the released data range from P1 to P12. V1 tables
 preserve the available seeds, scores, solver statuses, MIP gaps, execution
-times and GA configurations. V2 tables expose only reported aggregates and
-the de-identified maximum-gap project; they contain no fabricated raw records.
+times and GA configurations. V2 scalability tables preserve configuration-level
+scores, dispersion, best seeds, timing and status fields while omitting team
+membership and timestamps. No individual GA runs have been synthesized.
 
 ## Experimental environments
 

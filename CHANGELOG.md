@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.2.0 — 2026-09-14
+
+- Add V2 configuration-level MILP and GA summaries for 510 candidates at
+  k=5,6,7,8,9,10,12 and 1,000 candidates at k=4.
+- Recompute score differences, certification, tie counts, GA dispersion, and
+  per-size runtimes; retain the separate reported 510-candidate k=4 baseline.
+- Confirm the former k=5..10 aggregates from the new instance records; the
+  updated B0 scalability series includes k=12, not the baseline k=4.
+- Preserve negative differences, including GA's higher returned score on B1/P5.
+- Compare best-of-30 quality with the sum of all 30 GA run durations.
+- Flag the B0 P10/k=8 duration above the nominal budget and prevent branch
+  solver diagnostics from being interpreted as global AE bounds.
+- Add reproducible decimal-arithmetic analysis and regression checks.
+- Document code, input, individual-run and environment boundaries. Do not
+  distribute truncated scripts as complete runnable implementations.
+- Keep historical V1 evidence unchanged; no historical V1 B1 experiment is added.
+
+
 ## 1.1.0 — 2026-09-14
 
 - Align the package with the V1/V2 distinction in the KBS manuscript.

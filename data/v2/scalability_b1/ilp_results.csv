@@ -1,0 +1,13 @@
+project,team_size_tested,metodo,status,AT,AC_original,AC_after_compression,AE,time_s,mip_gap_pct,best_bound,must_dom_ok,must_eco_ok,must_ling_ok,all_must_ok,ilp_suffered
+P1,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.989011,0.8,0.65,0.706502,7205.75,17.0416,0.4367623117623117,true,true,true,true,true
+P2,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.889194,0.9,0.7,0.731532,7208.63,21.4897,0.4837708587708588,true,true,true,true,true
+P3,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.907204,0.833333,0.666667,0.706756,7207.03,38.053,0.5155214476490207,true,true,true,true,true
+P4,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.79304,0.9,0.7,0.715507,7207.88,38.4223,0.5290130165668625,true,true,true,true,true
+P5,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.804436,0.833333,0.666667,0.689629,7206.5,17.2405,0.4177219178593431,true,true,true,true,true
+P6,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.987485,0.766667,0.633333,0.692358,7207.57,47.9807,0.5312881562881563,true,true,true,true,true
+P7,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.989011,0.9,0.7,0.748168,7209.25,46.5906,0.6081094831094832,true,true,true,true,true
+P8,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.95177,0.9,0.7,0.741962,7209.43,20.5894,0.479904354904355,true,true,true,true,true
+P9,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.92735,0.9,0.7,0.737892,7202.43,28.8732,0.5213675213675214,true,true,true,true,true
+P10,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),1,0.9,0.7,0.75,7202.33,43.1624,0.5965099715099715,true,true,true,true,true
+P11,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.779914,0.9,0.7,0.713319,7202.34,10.6708,0.4205331705331706,true,true,true,true,true
+P12,4,ILP,Feasible (decomp: A=Feasible (time limit); B=Feasible (time limit)),0.963065,0.866667,0.683333,0.729955,7203.33,47.4859,0.5849613349613351,true,true,true,true,true

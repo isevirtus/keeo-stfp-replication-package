@@ -9,7 +9,7 @@ of that specification; their software versions must be recorded separately.
 | Transition | What changes | Evidence in this package |
 |---|---|---|
 | V1 BN to V1 surrogate | Executable representation; the V1 policy remains the reference | RQ1 pointwise and decision fidelity; RQ2 evaluator-call runtime |
-| V1 to V2 | Technical-priority semantics, useful Must redundancy levels, and AC scale | Change-impact record below, reported preference-order aggregates, and V2 GA/MILP aggregates |
+| V1 to V2 | Technical-priority semantics, useful Must redundancy levels, and AC scale | Change-impact record below, reported preference-order aggregates, and V2 GA/MILP baseline and configuration-level scalability summaries |
 
 The V1 surrogate is optional. Keeping the V1 BN is a supported design choice.
 V2 was implemented with a lightweight evaluator by choice, not because its
