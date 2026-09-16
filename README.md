@@ -1,8 +1,24 @@
-# KEEO-STFP Replication Package
+# KESO-STFP Replication Package
 
-Supplementary material for **“Knowledge Engineering for Evolutionary Optimization: From Expert Knowledge to Auditable and Executable Search Models.”**
+Supplementary material for **“Knowledge Engineering for Search and Optimization: From Expert Knowledge to Auditable and Executable Models.”**
 
-The paper introduces **Knowledge Engineering for Evolutionary Optimization (KEEO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.0** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, and verification scripts.
+The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.1** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, and verification scripts.
+
+KESO engineers domain knowledge into explicit variables, constraints, preferences,
+and executable evaluation models; it does not prescribe an evolutionary algorithm.
+The study evaluates a GA and an exact MILP formulation. Either can be the
+operational optimizer, selected according to deadline, workload, instance
+difficulty, and required assurance. Using MILP as the GA's quality reference was
+an experimental choice, not a requirement of KESO. Other compatible engines,
+such as simulated annealing, are design options, not implementations evaluated
+in this package. Evaluator choice (BN, direct lightweight model, or optional
+surrogate) is separate from optimizer choice.
+
+**Naming and compatibility:** KESO replaces the former method name KEEO.
+Version 1.2.1 updates documentation and citation metadata only; all experimental
+data and analysis code are unchanged. The repository URL and the
+data/keeo_traceability/ directory retain their existing names to preserve links
+and script compatibility.
 
 The authoritative artifact is the **knowledge specification**, not the BN. The
 BN is a V1 reference implementation; replacing it with a V1 surrogate is an
