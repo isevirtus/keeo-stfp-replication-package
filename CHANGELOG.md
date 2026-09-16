@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.1 — 2026-09-16
+
+- Rename the method to Knowledge Engineering for Search and Optimization (KESO).
+- Update the paper title, package name, citation metadata, and current documentation.
+- Clarify that exact and heuristic optimization are context-dependent alternatives;
+  the GA and MILP are the evaluated implementations, not required components.
+- Distinguish evaluator selection from optimizer selection.
+- Preserve all experimental data, numerical results, and analysis code.
+- Retain the repository URL and data/keeo_traceability/ paths for compatibility.
+- Regenerate the integrity manifest for the intentional documentation changes.
+
 ## 1.2.0 — 2026-09-14
 
 - Add V2 configuration-level MILP and GA summaries for 510 candidates at
