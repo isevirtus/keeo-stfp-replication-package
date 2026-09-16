@@ -1,6 +1,6 @@
 # Knowledge versions and refinement evidence
 
-KEEO makes the versioned knowledge specification authoritative. A Bayesian
+KESO makes the versioned knowledge specification authoritative. A Bayesian
 network (BN), a lightweight evaluator, and an optimization model are realizations
 of that specification; their software versions must be recorded separately.
 
@@ -16,6 +16,20 @@ V2 was implemented with a lightweight evaluator by choice, not because its
 knowledge changes require abandoning a BN. A BN could encode V2, but no
 executed V2 BN-versus-surrogate equivalence or runtime experiment is released
 here. V1 approximation accuracy must not be attributed to V2.
+
+## Optimizer choice is a separate decision
+
+The selected knowledge version defines the objective and feasibility rules.
+A GA, an exact MILP solver, or another compatible engine can optimize that
+specification. Either GA or MILP can supply the recommendation directly;
+running both is optional. A MILP formulation is not an evolutionary algorithm,
+and a time-limited exact-solver invocation may return a feasible incumbent
+without certifying optimality. Optimizer selection and configuration do not
+change the policy version unless the represented objective or constraints change.
+
+The GA/MILP experiments assess the implementations used in this study. They
+do not evaluate every engine permitted by the KESO process. BN/surrogate
+fidelity and optimizer solution quality are distinct questions.
 
 ## Change-impact record
 
