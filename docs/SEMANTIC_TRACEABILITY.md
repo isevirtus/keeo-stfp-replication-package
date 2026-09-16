@@ -1,4 +1,4 @@
-# KEEO semantic traceability audit
+# KESO semantic traceability audit
 
 This document records the post-construction audit of the semantic-to-executable
 artifact chain used in the STFP instantiation. It is a documentary audit of the
@@ -46,7 +46,7 @@ uses shared-project count N and the expert-defined transformation f(N), not
 structured OSF or SLF observations. These exclusions are recorded rather than
 presented as full construct coverage.
 
-The authoritative artifact in KEEO is the versioned knowledge specification,
+The authoritative artifact in KESO is the versioned knowledge specification,
 not the BN. The BN realizes V1; its surrogate is an optional alternative
 implementation. V2 changes the technical-priority rules and AC scale, and is
 implemented directly by a lightweight evaluator. See
