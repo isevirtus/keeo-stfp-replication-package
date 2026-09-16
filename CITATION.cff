@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this replication package, please cite the associated paper and this repository."
-title: "KEEO-STFP Replication Package"
+title: "KESO-STFP Replication Package"
 type: dataset
-version: 1.2.0
-date-released: 2026-09-14
+version: 1.2.1
+date-released: 2026-09-16
 repository-code: "https://github.com/isevirtus/keeo-stfp-replication-package"
 authors:
   - family-names: Cunha
@@ -22,7 +22,7 @@ authors:
     given-names: Angelo
 preferred-citation:
   type: article
-  title: "Knowledge Engineering for Evolutionary Optimization: From Expert Knowledge to Auditable and Executable Search Models"
+  title: "Knowledge Engineering for Search and Optimization: From Expert Knowledge to Auditable and Executable Models"
   authors:
     - family-names: Cunha
       given-names: Felipe
