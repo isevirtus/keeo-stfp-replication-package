@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.2 — 2026-10-06
+
+- Document the single expert's experience, consultative/shared decision role,
+  project-specific ramp-up practices, and further collaboration-policy elicitation.
+- Separate support for qualitative rationales from unresolved numerical choices
+  and unimplemented refinement proposals.
+- Clarify the cautious Low default and distinguish raw, ordinal, and V2 scales.
+- Record the reporting boundary around historical external data preparation.
+- Preserve the V1/V2 equations, experimental records, and analysis scripts.
+- Do not add unverified sensitivity records or imply a new knowledge version.
+
 ## 1.2.1 — 2026-09-16
 
 - Rename the method to Knowledge Engineering for Search and Optimization (KESO).

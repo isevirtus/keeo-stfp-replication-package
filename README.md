@@ -2,7 +2,7 @@
 
 Supplementary material for **“Knowledge Engineering for Search and Optimization: From Expert Knowledge to Auditable and Executable Models.”**
 
-The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.1** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, and verification scripts.
+The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.2** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, verification scripts, and a non-nominal account of the expert follow-up.
 
 KESO engineers domain knowledge into explicit variables, constraints, preferences,
 and executable evaluation models; it does not prescribe an evolutionary algorithm.
@@ -15,8 +15,9 @@ in this package. Evaluator choice (BN, direct lightweight model, or optional
 surrogate) is separate from optimizer choice.
 
 **Naming and compatibility:** KESO replaces the former method name KEEO.
-Version 1.2.1 updates documentation and citation metadata only; all experimental
-data and analysis code are unchanged. The repository URL and the
+Version 1.2.1 introduced the naming update; version 1.2.2 adds follow-up
+elicitation and reporting documentation. All experimental data and analysis
+code remain unchanged. The repository URL and the
 data/keeo_traceability/ directory retain their existing names to preserve links
 and script compatibility.
 
@@ -37,6 +38,7 @@ The public release supports the following forms of result inspection and reprodu
 6. **Knowledge refinement:** inspect the V1-to-V2 AT/AC changes, reported coefficients, and preference-order coverage (13/14 to 14/14).
 7. **Primary V2 optimization evidence (RQ3/RQ4):** inspect the separate 510-candidate size-four baseline; recompute 84 larger-team comparisons on 510 candidates and 12 size-four comparisons on 1,000 candidates.
 8. **Package integrity:** verify released counts, V1 seed grids, comparison conventions, de-identification checks, and SHA-256 checksums.
+9. **Expert follow-up:** distinguish policy rationales, contextual practices, and proposed refinements from the unchanged V2 specification; see [EXPERT_FOLLOWUP.md](docs/EXPERT_FOLLOWUP.md).
 
 The package is an **analysis-reproduction package**, not a self-contained
 end-to-end execution environment. Organizational inputs, original semantic
@@ -106,6 +108,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |   |-- DATA_DICTIONARY.md
 |   |-- ENVIRONMENT.md
 |   |-- SEMANTIC_TRACEABILITY.md
+|   |-- EXPERT_FOLLOWUP.md
 |   |-- KNOWLEDGE_VERSIONS.md
 |   `-- REPRODUCIBILITY.md
 |-- scripts/

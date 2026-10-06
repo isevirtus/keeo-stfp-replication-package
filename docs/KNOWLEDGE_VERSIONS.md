@@ -91,3 +91,17 @@ for an infeasible team.
 The operational collaboration graph is derived from shared-project count
 and the expert transformation of that count. OSF and SLF are not operational
 graph inputs; see [`SEMANTIC_TRACEABILITY.md`](SEMANTIC_TRACEABILITY.md).
+
+## Follow-up elicitation does not silently redefine V2
+
+The [expert follow-up](EXPERT_FOLLOWUP.md) supports the rationale for a cautious
+Low default, while leaving the exact saturation peak and the treatment of
+extensively collaborating pairs open for further validation. These responses
+do not specify an implemented replacement function. In particular, a proposed
+history-specific floor is not part of the V2 results released here.
+
+The no-history value 0.3 is Low, not neutral; the neutral point is 0.5.
+Its V2 transformed value is 0.4. Raw saturation outputs, ordinal-state values,
+and compressed V2 scores should not be compared without their transformation
+and version context. A future change to these rules requires a new knowledge
+version and corresponding validation of every affected evaluator and optimizer.

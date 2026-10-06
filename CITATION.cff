@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this replication package, please cite the associated paper and this repository."
 title: "KESO-STFP Replication Package"
 type: dataset
-version: 1.2.1
-date-released: 2026-09-16
+version: 1.2.2
+date-released: 2026-10-06
 repository-code: "https://github.com/isevirtus/keeo-stfp-replication-package"
 authors:
   - family-names: Cunha

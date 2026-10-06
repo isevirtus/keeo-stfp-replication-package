@@ -15,6 +15,7 @@ records and checksums, not independent replication of organizational experiments
 | Earlier RQ3 | V1 lineage | 12 MILP records, 360 GA runs | Regenerate signed project comparisons |
 | Earlier team-size analysis | V1 lineage | 84 project summaries | Recompute aggregates; no individual GA runs |
 | Knowledge refinement | V1 to V2 | Coefficients, change record, 13/14 and 14/14 counts | Inspect aggregate calibration evidence, not rerun it |
+| Expert follow-up | Subsequent elicitation; no new executable version | Non-nominal narrative in EXPERT_FOLLOWUP.md | Inspect policy rationale and unresolved refinement boundaries, not independently validate parameter values |
 | Primary RQ3 | V2, B0, k=4 | Reported aggregate | Inspect 12 certificates, nine GA matches and reported gaps |
 | RQ4 team-size scalability | V2, B0 | 84 MILP records and 84 GA configuration summaries | Recompute ties, score differences, per-size summaries and times |
 | RQ4 candidate-pool scalability | V2, B1 | 12 MILP records and 12 GA configuration summaries | Recompute incumbent comparisons, dispersion and times |
@@ -85,6 +86,26 @@ probability vectors needed for the Brier score.
   experiment, including B1 hardware and thread/load controls.
 - Sanitized preparation records and privacy-compatible inputs or a small
   runnable example if industrial inputs cannot be released.
+
+## Follow-up and reporting boundaries
+
+The expert follow-up is a narrative evidence record, not another GA/MILP run
+or an independent-expert validation sample. Original questionnaire responses,
+timestamps, consent records, and private source links are not distributed.
+
+Fixed-team evaluator-sensitivity inputs, scripts, and per-project/weight results
+are not included in this release. No sensitivity table or figure can be
+regenerated from this package, and aggregation-weight sensitivity must not be
+represented as testing the saturation peak, missing-history default, or AC
+compression factor.
+
+For the historical GPT-4o-mini-assisted preparation, exact execution dates,
+access interface, generation settings, and de-identification of every batch
+before external processing are not established. Pseudonymization before later
+analyses does not establish those earlier processing conditions. The public
+package does not supply missing prompts, configuration records, or privacy
+approvals. See [EXPERT_FOLLOWUP.md](EXPERT_FOLLOWUP.md) for the separate scope
+of the participant's consent to non-nominal characterization.
 
 The V2 script text received for B1 was truncated. It is not included as a
 runnable implementation, and complete-looking B0 excerpts are not substituted
