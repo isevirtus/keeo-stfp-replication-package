@@ -2,7 +2,7 @@
 
 Supplementary material for **“Knowledge Engineering for Search and Optimization: From Expert Knowledge to Auditable and Executable Models.”**
 
-The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.2.2** contains de-identified experimental results, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, verification scripts, and a non-nominal account of the expert follow-up.
+The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.3.0** contains de-identified experimental results, fixed-candidate evaluator-sensitivity data and analysis, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, verification scripts, and a non-nominal account of the expert follow-up.
 
 KESO engineers domain knowledge into explicit variables, constraints, preferences,
 and executable evaluation models; it does not prescribe an evolutionary algorithm.
@@ -15,9 +15,10 @@ in this package. Evaluator choice (BN, direct lightweight model, or optional
 surrogate) is separate from optimizer choice.
 
 **Naming and compatibility:** KESO replaces the former method name KEEO.
-Version 1.2.1 introduced the naming update; version 1.2.2 adds follow-up
-elicitation and reporting documentation. All experimental data and analysis
-code remain unchanged. The repository URL and the
+Version 1.2.1 introduced the naming update; version 1.2.2 added follow-up
+elicitation and reporting documentation. Version 1.3.0 adds aggregation
+sensitivity while preserving all previously released experimental data.
+The repository URL and the
 data/keeo_traceability/ directory retain their existing names to preserve links
 and script compatibility.
 
@@ -39,6 +40,7 @@ The public release supports the following forms of result inspection and reprodu
 7. **Primary V2 optimization evidence (RQ3/RQ4):** inspect the separate 510-candidate size-four baseline; recompute 84 larger-team comparisons on 510 candidates and 12 size-four comparisons on 1,000 candidates.
 8. **Package integrity:** verify released counts, V1 seed grids, comparison conventions, de-identification checks, and SHA-256 checksums.
 9. **Expert follow-up:** distinguish policy rationales, contextual practices, and proposed refinements from the unchanged V2 specification; see [EXPERT_FOLLOWUP.md](docs/EXPERT_FOLLOWUP.md).
+10. **Aggregation sensitivity:** reproduce simple-mean versus MIXMINMAX rankings and five weight settings on 960 historical run-result records across 16 projects; see [EVALUATOR_SENSITIVITY.md](docs/EVALUATOR_SENSITIVITY.md).
 
 The package is an **analysis-reproduction package**, not a self-contained
 end-to-end execution environment. Organizational inputs, original semantic
@@ -102,6 +104,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |       |-- runtime_summary.csv
 |       |-- refinement_summary.csv
 |       |-- parameters.csv
+|       |-- evaluator_sensitivity/  # 960 fixed-candidate records, 16 projects
 |       |-- scalability_b0/  # V2: 510 candidates, k=5,6,7,8,9,10,12
 |       `-- scalability_b1/  # V2: 1000 candidates, k=4
 |-- docs/
@@ -109,6 +112,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |   |-- ENVIRONMENT.md
 |   |-- SEMANTIC_TRACEABILITY.md
 |   |-- EXPERT_FOLLOWUP.md
+|   |-- EVALUATOR_SENSITIVITY.md
 |   |-- KNOWLEDGE_VERSIONS.md
 |   `-- REPRODUCIBILITY.md
 |-- scripts/
@@ -117,6 +121,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |   |-- regenerate_tables.py
 |   |-- summarize_v2.py
 |   |-- analyze_v2_scalability.py
+|   |-- analyze_evaluator_sensitivity.py
 |   |-- benchmark_surrogate_vs_bn.py
 |   |-- benchmark_scalability.py
 |   `-- generate_manifest.py
@@ -249,6 +254,21 @@ The size-four B0 baseline retains mean relative gap 0.3879%, maximum 2.5986%
 30-run cost is 276.3 s from the rounded mean, not a recorded batch duration.
 
 ## Regenerating public analyses
+
+Fixed-candidate aggregation sensitivity:
+
+```bash
+python scripts/analyze_evaluator_sensitivity.py
+```
+
+This independently implemented analysis reproduces the supplied summaries and
+per-record ranks from released component scores. Outputs go to
+`reproduced/evaluator_sensitivity/`. The 960 records represent 726 distinct
+project–team compositions; Top-5 overlap is record-level and uses stable
+input-order tie-breaking. Pooled correlation is 0.983976, mean within-project
+correlation is 0.874022, and average Top-5 overlap is 66.25%. The weights 3:1,
+7:1, and 9:1 preserve the 5:1 top selection in 14, 15, and 14 of 16 projects.
+This is fixed-candidate rescoring, not new GA runs or a claim of team effectiveness.
 
 Decision fidelity from released candidate-score pairs:
 

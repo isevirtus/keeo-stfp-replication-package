@@ -168,3 +168,29 @@ exceptions; [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the artifact boundary.
 ## De-identification
 
 Selected-team IDs and project descriptions were removed before publication.
+
+## Fixed-candidate evaluator sensitivity
+
+Files under `data/v2/evaluator_sensitivity/` refer to a separate 16-project
+corpus, not the 12-project exact/scalability instances.
+
+| Field | Meaning |
+|---|---|
+| sample_id | Unique project/generator/seed key for one historical run-result record. |
+| project | P1–P16 within this corpus; not a cross-experiment join key. |
+| generator | GA_before or GA_corrected; candidate origin, not the scoring version used here. |
+| seed | Recorded integer 1–30 in each project/generator group. |
+| candidate_id | Opaque project-specific composition identifier; repeats identify equal membership sets without releasing membership. |
+| team_size | Number of members, four to nine. |
+| AT_final, AC_final | Corrected technical and compressed collaboration component scores, held fixed. |
+| AE_recorded_v2 | Recorded overall V2 score used to check 5:1 recomputation. |
+| AE_mean, AE_mixminmax_w5 | Simple-mean and 5:1 scores of the same record. |
+| diferenca_media_menos_mixminmax | Mean minus 5:1 score, the imbalance penalty. |
+| rank_mean_in_project, rank_mixminmax_in_project | Descending within-project ranks; exact ties get average ranks. |
+| top5_mean, top5_mixminmax | True for one of exactly five selected records; input order breaks exact ties. |
+| top5_overlap_count/rate | Intersection of two five-record sets and intersection divided by five. |
+| weight_min, weight_max | Weights applied to the lower and higher component, respectively. |
+| top1_same_projects/rate | Projects retaining the 5:1 selected record, and count divided by 16. |
+
+Scope, numerical extraction, summary metrics, and reproducibility boundaries
+are specified in [EVALUATOR_SENSITIVITY.md](EVALUATOR_SENSITIVITY.md).

@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.0 — 2026-10-06
+
+- Add fixed-candidate aggregation sensitivity: 960 run-result records, 726
+  distinct project–team compositions, 16 project contexts, and five weights.
+- Release component scores, opaque project-specific candidate IDs, reported
+  per-record outputs, and global/project/weight summaries without memberships.
+- Add an independently implemented standard-library analysis and integrate
+  row-level, ranking, summary, and tie-diagnostic checks into package verification.
+- Document exact-tie conventions, extraction precision, repeated compositions,
+  and the distinction between evaluator rescoring and new optimizer experiments.
+- Preserve all previous experimental data and the evaluated V1/V2 formulas.
+
 ## 1.2.2 — 2026-10-06
 
 - Document the single expert's experience, consultative/shared decision role,

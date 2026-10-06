@@ -15,6 +15,7 @@ from pathlib import Path
 from generate_manifest import release_files
 from summarize_v2 import load_and_validate
 from analyze_v2_scalability import analyze
+from analyze_evaluator_sensitivity import verify as verify_evaluator_sensitivity
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -241,6 +242,7 @@ def main() -> None:
     verify_b0_scalability()
     verify_v2()
     verify_v2_scalability_artifacts()
+    verify_evaluator_sensitivity()
     verify_deidentification()
     print("All replication-package checks passed.")
 

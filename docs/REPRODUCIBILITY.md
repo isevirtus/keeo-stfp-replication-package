@@ -16,6 +16,7 @@ records and checksums, not independent replication of organizational experiments
 | Earlier team-size analysis | V1 lineage | 84 project summaries | Recompute aggregates; no individual GA runs |
 | Knowledge refinement | V1 to V2 | Coefficients, change record, 13/14 and 14/14 counts | Inspect aggregate calibration evidence, not rerun it |
 | Expert follow-up | Subsequent elicitation; no new executable version | Non-nominal narrative in EXPERT_FOLLOWUP.md | Inspect policy rationale and unresolved refinement boundaries, not independently validate parameter values |
+| Aggregation sensitivity | Fixed corrected AT and compressed AC; alternative final weights | 960 score records, 726 distinct project–team combinations, 16 projects | Recompute per-record scores/ranks, project Top-5 overlap, and five weight comparisons |
 | Primary RQ3 | V2, B0, k=4 | Reported aggregate | Inspect 12 certificates, nine GA matches and reported gaps |
 | RQ4 team-size scalability | V2, B0 | 84 MILP records and 84 GA configuration summaries | Recompute ties, score differences, per-size summaries and times |
 | RQ4 candidate-pool scalability | V2, B1 | 12 MILP records and 12 GA configuration summaries | Recompute incumbent comparisons, dispersion and times |
@@ -54,6 +55,7 @@ python scripts/verify_package.py
 python scripts/analyze_decision_fidelity.py
 python scripts/summarize_v2.py
 python scripts/analyze_v2_scalability.py
+python scripts/analyze_evaluator_sensitivity.py
 ```
 
 The V2 scalability command writes comparisons and summaries under
@@ -93,10 +95,13 @@ The expert follow-up is a narrative evidence record, not another GA/MILP run
 or an independent-expert validation sample. Original questionnaire responses,
 timestamps, consent records, and private source links are not distributed.
 
-Fixed-team evaluator-sensitivity inputs, scripts, and per-project/weight results
-are not included in this release. No sensitivity table or figure can be
-regenerated from this package, and aggregation-weight sensitivity must not be
-represented as testing the saturation peak, missing-history default, or AC
+Fixed-candidate evaluator-sensitivity inputs and per-project/weight results
+are included with an independent analysis implementation. They reproduce
+rescoring from component values, not feature extraction or historical search.
+The original experiment script is not included. See
+[EVALUATOR_SENSITIVITY.md](EVALUATOR_SENSITIVITY.md) for precision, duplicate
+compositions, record-based Top-5 selection, and tie handling. Aggregation-weight
+sensitivity does not test the saturation peak, missing-history default, or AC
 compression factor.
 
 For the historical GPT-4o-mini-assisted preparation, exact execution dates,
