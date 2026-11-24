@@ -47,7 +47,7 @@ def load_and_validate():
 
 def render(data):
     headers = ['Pool / team sizes', 'Instances', 'Certified', 'GA ties', 'MILP higher', 'GA higher', 'Valid GA runs', 'Mean abs. AE difference']
-    labels = ['510 / k=4 (RQ3 baseline)', '510 / k=5–10,12 (RQ4)', '1000 / k=4 (RQ4)']
+    labels = ['510 / k=4 (RQ3 baseline)', '510 / k=5–10,12 (RQ3)', '1000 / k=4 (RQ3)']
     body = []
     for label,r in zip(labels,data):
         body.append([label,r['configurations'],r['milp_certified'],r['ga_matches_returned_milp'],r['milp_returned_higher'],r['ga_returned_higher'],r['ga_feasible_runs']+'/'+r['ga_runs'],f"{float(r['mean_absolute_AE_difference']):.5f}"])

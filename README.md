@@ -1,23 +1,27 @@
 # KESO-STFP Replication Package
 
-Supplementary material for **“Knowledge Engineering for Search and Optimization: From Expert Knowledge to Auditable and Executable Models.”**
+Supplementary material for **“Knowledge Engineering for Search and Optimization: From Expert Knowledge to Versioned Optimization Models for Software Team Formation.”**
 
-The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.3.0** contains de-identified experimental results, fixed-candidate evaluator-sensitivity data and analysis, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, verification scripts, and a non-nominal account of the expert follow-up.
+The paper introduces **Knowledge Engineering for Search and Optimization (KESO)** and instantiates it for the Software Team Formation Problem (STFP). Package version **1.3.1** contains de-identified experimental results, fixed-candidate evaluator-sensitivity data and analysis, a versioned knowledge-change record, reference benchmark runners, a sanitized solver log, verification scripts, reported practitioner-revalidation aggregates, and non-nominal provenance records.
 
 KESO engineers domain knowledge into explicit variables, constraints, preferences,
 and executable evaluation models; it does not prescribe an evolutionary algorithm.
-The study evaluates a GA and an exact MILP formulation. Either can be the
-operational optimizer, selected according to deadline, workload, instance
-difficulty, and required assurance. Using MILP as the GA's quality reference was
-an experimental choice, not a requirement of KESO. Other compatible engines,
+The study evaluates a GA and a MILP solver under the same specified objective.
+Either can be the operational optimizer, selected according to deadline, workload,
+instance difficulty, and required assurance. When the solver certifies optimality,
+its solution provides an exact reference; otherwise, the comparison concerns a
+feasible returned incumbent. Using MILP as the GA's quality reference was an
+experimental choice, not a requirement of KESO. Other compatible engines,
 such as simulated annealing, are design options, not implementations evaluated
 in this package. Evaluator choice (BN, direct lightweight model, or optional
 surrogate) is separate from optimizer choice.
 
 **Naming and compatibility:** KESO replaces the former method name KEEO.
 Version 1.2.1 introduced the naming update; version 1.2.2 added follow-up
-elicitation and reporting documentation. Version 1.3.0 adds aggregation
-sensitivity while preserving all previously released experimental data.
+elicitation and reporting documentation. Version 1.3.0 added aggregation
+sensitivity. Version 1.3.1 aligns the package with the current three-question
+article structure and adds aggregate practitioner-revalidation, LLM-provenance,
+and external-artifact records without changing experimental values.
 The repository URL and the
 data/keeo_traceability/ directory retain their existing names to preserve links
 and script compatibility.
@@ -31,16 +35,17 @@ choice. The main optimization evidence uses V2 on **510 candidates with varying 
 
 The public release supports the following forms of result inspection and reproduction:
 
-1. **Semantic traceability:** inspect eight documented construct dispositions: six operational traces and two explicit exclusions (OSF and SLF).
-2. **Surrogate fidelity (RQ1):** inspect pointwise and decision-level V1 fidelity on training, controlled-holdout, and semisynthetic end-to-end evaluations.
-3. **Surrogate versus Bayesian Network runtime (RQ2):** recompute descriptive statistics and the reported 19.69x and 21.69x speedups from 100 timing measurements.
-4. **Historical GA versus exact MILP evidence (RQ3 lineage):** regenerate the V1 12-project comparison from 12 MILP executions and 360 GA runs.
-5. **Historical team-size evidence (RQ4 lineage):** inspect the V1 84 project/team-size comparisons on the organization-derived 510-profile base.
-6. **Knowledge refinement:** inspect the V1-to-V2 AT/AC changes, reported coefficients, and preference-order coverage (13/14 to 14/14).
-7. **Primary V2 optimization evidence (RQ3/RQ4):** inspect the separate 510-candidate size-four baseline; recompute 84 larger-team comparisons on 510 candidates and 12 size-four comparisons on 1,000 candidates.
-8. **Package integrity:** verify released counts, V1 seed grids, comparison conventions, de-identification checks, and SHA-256 checksums.
-9. **Expert follow-up:** distinguish policy rationales, contextual practices, and proposed refinements from the unchanged V2 specification; see [EXPERT_FOLLOWUP.md](docs/EXPERT_FOLLOWUP.md).
-10. **Aggregation sensitivity:** reproduce simple-mean versus MIXMINMAX rankings and five weight settings on 960 historical run-result records across 16 projects; see [EVALUATOR_SENSITIVITY.md](docs/EVALUATOR_SENSITIVITY.md).
+1. **Semantic traceability (RQ1):** inspect eight documented construct dispositions: six operational traces and two explicit exclusions (OSF and SLF).
+2. **Knowledge refinement (RQ1):** inspect the V1-to-V2 AT/AC changes, reported coefficients, and preference-order coverage (13/14 to 14/14).
+3. **Practitioner revalidation (RQ1):** inspect reported aggregate outcomes for the 40 blinded V2 comparison cards and their interpretation boundaries; see [PRACTITIONER_REVALIDATION.md](docs/PRACTITIONER_REVALIDATION.md).
+4. **Aggregation sensitivity (RQ1):** reproduce simple-mean versus MIXMINMAX rankings and five weight settings on 960 historical run-result records across 16 projects; see [EVALUATOR_SENSITIVITY.md](docs/EVALUATOR_SENSITIVITY.md).
+5. **Surrogate fidelity (RQ2):** inspect pointwise and decision-level V1 fidelity on training, controlled-holdout, and semisynthetic end-to-end evaluations.
+6. **Surrogate versus Bayesian Network runtime (RQ2):** recompute descriptive statistics and the reported 19.69x and 21.69x runtime ratios from 100 timing measurements.
+7. **V2 search and certification evidence (RQ3):** inspect the separate 510-candidate size-four baseline; recompute 84 larger-team comparisons on 510 candidates and 12 size-four comparisons on 1,000 candidates.
+8. **Historical V1 evidence:** regenerate the 12-project GA-MILP comparison from 12 certified MILP solutions and 360 GA runs, and inspect the historical V1 team-size results. These records preserve evidence lineage but do not constitute separate research questions in the current article.
+9. **Package integrity:** verify released counts, V1 seed grids, comparison conventions, de-identification checks, and SHA-256 checksums.
+10. **Expert follow-up:** distinguish policy rationales, contextual practices, and proposed refinements from the unchanged V2 specification; see [EXPERT_FOLLOWUP.md](docs/EXPERT_FOLLOWUP.md).
+11. **LLM and external-artifact provenance:** inspect the known staffing-LLM execution record and the commit-pinned artifacts maintained in companion repositories; see [LLM_PROVENANCE.md](docs/LLM_PROVENANCE.md) and [EXTERNAL_ARTIFACTS.md](docs/EXTERNAL_ARTIFACTS.md).
 
 The package is an **analysis-reproduction package**, not a self-contained
 end-to-end execution environment. Organizational inputs, original semantic
@@ -51,6 +56,13 @@ for scalability, plus reported baseline and refinement aggregates. It does not
 include individual GA runs or a complete evaluator. The scripts reproduce
 analyses from these records, not the original optimization experiments. See the
 [article-to-artifact map and outstanding artifacts](docs/REPRODUCIBILITY.md).
+
+The current release provides only reported aggregates, not row-level records,
+for the 40-card V2 practitioner revalidation. It also does not release the
+staffing-LLM prompt and three raw responses or the original six calibration
+scenarios and fourteen preference relations. The article reports aggregate
+outcomes from these materials, and `docs/REPRODUCIBILITY.md` records the
+corresponding reproduction boundaries.
 
 ## Quick verification
 
@@ -103,6 +115,7 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |       |-- optimization_summary.csv
 |       |-- runtime_summary.csv
 |       |-- refinement_summary.csv
+|       |-- practitioner_revalidation_summary.csv
 |       |-- parameters.csv
 |       |-- evaluator_sensitivity/  # 960 fixed-candidate records, 16 projects
 |       |-- scalability_b0/  # V2: 510 candidates, k=5,6,7,8,9,10,12
@@ -112,6 +125,9 @@ de-identification checks, and file hashes. Run without Python's `-O` option.
 |   |-- ENVIRONMENT.md
 |   |-- SEMANTIC_TRACEABILITY.md
 |   |-- EXPERT_FOLLOWUP.md
+|   |-- PRACTITIONER_REVALIDATION.md
+|   |-- LLM_PROVENANCE.md
+|   |-- EXTERNAL_ARTIFACTS.md
 |   |-- EVALUATOR_SENSITIVITY.md
 |   |-- KNOWLEDGE_VERSIONS.md
 |   `-- REPRODUCIBILITY.md
@@ -140,7 +156,7 @@ OSF and SLF are not inputs to the operational collaboration graph. The aggregate
 in `semantic_traceability_summary.csv`, and the audit protocol and
 interpretation boundary are documented in `docs/SEMANTIC_TRACEABILITY.md`.
 
-### RQ1: surrogate fidelity
+### RQ2: surrogate fidelity
 
 `data/surrogate/fidelity_summary.csv` contains the three reported evaluations:
 
@@ -185,13 +201,13 @@ Caching and early stopping were disabled. A warm-up evaluation of both evaluator
 
 The benchmark used one Python process without explicit parallel evaluation. The operating system did not constrain threads that might be used internally by NumPy or its numerical backend.
 
-### RQ3 lineage: V1 GA against a certified exact reference
+### Historical V1 evidence: GA against a certified exact reference
 
 `data/rq3_exact_vs_ga/` contains the pre-refinement V1 evidence: 12 certified MILP solutions and 360 GA runs, using seeds 1-30 for each of 12 projects at team size four. The GA best-of-30 reached eight certified optima and remained within 2.26104% on the other four projects. Across all 360 runs, 73 reached a certified optimum within the absolute raw-AE tolerance of `1e-5`. These records preserve evidence lineage; they are not the V2 aggregate result foregrounded in the paper.
 
 The public files omit project descriptions, developer identifiers, selected-team identifiers, and timestamps. These fields are not required to reproduce the reported quality and runtime analyses.
 
-### RQ4 lineage: V1 team-size evidence on B0
+### Historical V1 evidence: team-size analysis on B0
 
 `data/scalability_b0/project_level.csv` contains the pre-refinement V1 evidence:
 84 project/team-size comparisons, with 12 projects for each of
@@ -203,7 +219,7 @@ The MILP certified 83 of 84 instances. The exception is P2 at `k=12`; its saniti
 
 Only project-level best-of-30 results are available for this historical V1 team-size analysis; its 2,520 individual GA run records are not included in the current source material.
 
-### V1-to-V2 refinement
+### RQ1: V1-to-V2 refinement
 
 [The knowledge-version record](docs/KNOWLEDGE_VERSIONS.md) documents the
 independent Must-gated Should/Could terms, useful Must redundancy levels,
@@ -212,7 +228,19 @@ optimization formulations, and validation evidence. `data/v2/` includes
 reported parameters and the six-scenario preference-order aggregates, with
 unavailable parameters explicitly distinguished from zero.
 
-### Primary RQ3/RQ4: V2 baseline and two scalability dimensions
+### RQ1: practitioner revalidation of V2
+
+`data/v2/practitioner_revalidation_summary.csv` records the aggregate outcomes
+reported for the 40 blinded comparison cards: 16 LLM, 12 historical-team, and
+12 uniform-GA comparisons. It records 14/16 LLM comparisons in which both teams
+were judged acceptable, historical-team outcomes of seven historical preferences,
+three refined-GA preferences, and two equivalences, and uniform-GA outcomes of
+four refined-GA preferences, six equivalences, and two uniform-GA preferences.
+These are reported aggregates from one practitioner, not row-level responses,
+independent observations, or a controlled V1-to-V2 treatment effect. See
+[`docs/PRACTITIONER_REVALIDATION.md`](docs/PRACTITIONER_REVALIDATION.md).
+
+### RQ3: V2 baseline and two scalability dimensions
 
 | Pool / team sizes | Configurations | MILP certified | Feasible, uncertified | GA ties | MILP higher | GA higher | Valid GA runs | Mean absolute AE difference |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -294,7 +322,7 @@ CSV files under `data/v2/scalability_b0/` and `data/v2/scalability_b1/`.
 The historical V1 comparison script uses only the Python standard library and
 applies a single absolute raw-AE tie tolerance of `1e-5`.
 
-Historical V1 RQ3:
+Historical V1 exact-reference comparison:
 
 ```bash
 python scripts/regenerate_tables.py \

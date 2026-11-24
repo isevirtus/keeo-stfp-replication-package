@@ -8,18 +8,19 @@ records and checksums, not independent replication of organizational experiments
 
 | Evidence | Version | Public records | Supported operation |
 |---|---|---|---|
-| Semantic traceability | V1 core audit; V2 changes separately documented | Eight-construct audit and counts | Inspect six operational traces and two explicit exclusions |
-| RQ1 pointwise fidelity | V1 | Three aggregates | Inspect errors; no raw training/holdout predictions |
-| RQ1 decision fidelity | V1 | 1,200 candidate-score pairs and summaries | Recompute rankings, overlap, regret and score error |
+| RQ1 semantic traceability | V1 core audit; V2 changes separately documented | Eight-construct audit and counts | Inspect six operational traces and two explicit exclusions |
+| RQ1 knowledge refinement | V1 to V2 | Coefficients, change record, 13/14 and 14/14 counts | Inspect aggregate calibration evidence, not rerun it |
+| RQ1 practitioner revalidation | V2 | Reported aggregates for 40 comparison cards | Inspect reported counts and boundaries; no row-level response reproduction |
+| RQ1 aggregation sensitivity | Fixed corrected AT and compressed AC; alternative final weights | 960 score records, 726 distinct project-team combinations, 16 projects | Recompute per-record scores/ranks, project Top-5 overlap, and five weight comparisons |
+| RQ2 pointwise fidelity | V1 | Three aggregates | Inspect errors; no raw training/holdout predictions |
+| RQ2 decision fidelity | V1 | 1,200 candidate-score pairs and summaries | Recompute rankings, overlap, regret and score error |
 | RQ2 runtime | V1 | 100 timings | Recompute condition summaries and ratios |
-| Earlier RQ3 | V1 lineage | 12 MILP records, 360 GA runs | Regenerate signed project comparisons |
+| Historical V1 exact-reference evidence | V1 lineage | 12 MILP records, 360 GA runs | Regenerate signed project comparisons |
 | Earlier team-size analysis | V1 lineage | 84 project summaries | Recompute aggregates; no individual GA runs |
-| Knowledge refinement | V1 to V2 | Coefficients, change record, 13/14 and 14/14 counts | Inspect aggregate calibration evidence, not rerun it |
 | Expert follow-up | Subsequent elicitation; no new executable version | Non-nominal narrative in EXPERT_FOLLOWUP.md | Inspect policy rationale and unresolved refinement boundaries, not independently validate parameter values |
-| Aggregation sensitivity | Fixed corrected AT and compressed AC; alternative final weights | 960 score records, 726 distinct project–team combinations, 16 projects | Recompute per-record scores/ranks, project Top-5 overlap, and five weight comparisons |
-| Primary RQ3 | V2, B0, k=4 | Reported aggregate | Inspect 12 certificates, nine GA matches and reported gaps |
-| RQ4 team-size scalability | V2, B0 | 84 MILP records and 84 GA configuration summaries | Recompute ties, score differences, per-size summaries and times |
-| RQ4 candidate-pool scalability | V2, B1 | 12 MILP records and 12 GA configuration summaries | Recompute incumbent comparisons, dispersion and times |
+| RQ3 size-four baseline | V2, B0, k=4 | Reported aggregate | Inspect 12 certificates, nine GA matches and reported gaps |
+| RQ3 team-size scalability | V2, B0 | 84 MILP records and 84 GA configuration summaries | Recompute ties, score differences, per-size summaries and times |
+| RQ3 candidate-pool scalability | V2, B1 | 12 MILP records and 12 GA configuration summaries | Recompute incumbent comparisons, dispersion and times |
 
 ## Versions and denominators
 
@@ -29,7 +30,7 @@ runs. B1 has 1,000 candidates and k=4: 12 configurations, no certificates,
 nine matches, two MILP-higher and one GA-higher result, 360 valid GA runs.
 The same 12 project contexts recur in both experiments.
 
-The separate B0 k=4 RQ3 baseline is not included in either RQ4 denominator.
+The separate B0 k=4 RQ3 baseline is not included in either scalability denominator.
 It remains an aggregate: 12 certificates, nine GA matches and 360 valid runs.
 The old V2 k=5..10 aggregates are confirmed by their 72 matching configurations
 in the new B0 data; do not add them again. The historical V1 B0 series is a
@@ -78,6 +79,10 @@ probability vectors needed for the Brier score.
   full-precision parameters and software revisions.
 - Original six elicitation scenarios, 14 preference relations, calibration
   code and the precise fitting-error definition.
+- Row-level records, blind-card mappings, and response forms for the 40-card
+  V2 practitioner revalidation; the public file contains reported aggregates.
+- The staffing-LLM prompt, sanitized input files, and three raw responses;
+  `LLM_PROVENANCE.md` records only the preserved execution facts.
 - Approved B0/B1 input manifests and graph construction procedures; the
   additional B1 profiles and edges require an explicit construction record.
 - Individual V2 GA outputs and seed logs: 2,880 runs in the two scalability
@@ -95,6 +100,11 @@ The expert follow-up is a narrative evidence record, not another GA/MILP run
 or an independent-expert validation sample. Original questionnaire responses,
 timestamps, consent records, and private source links are not distributed.
 
+The V2 practitioner-revalidation file contains reported aggregate counts only.
+It does not permit reconstruction of card order, A/B position, project-level
+responses, optional comments, or response timing. See
+[PRACTITIONER_REVALIDATION.md](PRACTITIONER_REVALIDATION.md).
+
 Fixed-candidate evaluator-sensitivity inputs and per-project/weight results
 are included with an independent analysis implementation. They reproduce
 rescoring from component values, not feature extraction or historical search.
@@ -111,6 +121,11 @@ analyses does not establish those earlier processing conditions. The public
 package does not supply missing prompts, configuration records, or privacy
 approvals. See [EXPERT_FOLLOWUP.md](EXPERT_FOLLOWUP.md) for the separate scope
 of the participant's consent to non-nominal characterization.
+
+The staffing-LLM condition is documented separately in
+[LLM_PROVENANCE.md](LLM_PROVENANCE.md). The prompt and three raw responses were
+reported as preserved locally but are not included. Commit-pinned companion
+artifacts are indexed in [EXTERNAL_ARTIFACTS.md](EXTERNAL_ARTIFACTS.md).
 
 The V2 script text received for B1 was truncated. It is not included as a
 runnable implementation, and complete-looking B0 excerpts are not substituted

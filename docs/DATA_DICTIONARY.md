@@ -9,7 +9,7 @@
 | `AT` / `ilp_AT` / `ga_best_AT` | Technical adequacy. |
 | `AC` / `ilp_AC` / `ga_best_AC` | Collaboration adequacy. |
 | `AE` / `ilp_AE` / `ga_best_AE` | Overall adequacy optimized by the GA and MILP. |
-| `seed` / `ga_best_seed` | Integer random seed. Released V1 RQ3 run records use seeds 1-30; V2 scalability summaries preserve best_seed only; full per-run seed records are not released. |
+| `seed` / `ga_best_seed` | Integer random seed. Released historical V1 exact-reference records use seeds 1-30; V2 scalability summaries preserve best_seed only; full per-run seed records are not released. |
 | `tempo_s` / `*_time_s` | Wall-clock elapsed time in seconds. |
 | `status` / `ilp_status` | GA execution status or solver status. Only exact `Optimal` certifies the combined MILP result. |
 | `mip_gap_pct` | Reported solver diagnostic in percent. It is not the GA optimality gap; V2 branch diagnostics are not global AE gaps (see below). |
@@ -112,6 +112,26 @@ not pool their means.
 | `satisfied_preference_relations` | 13 for V1 and 14 for V2. |
 | `reported_fit_error` | Recorded calibration error; no more specific metric name is inferred. |
 | `parameter` / `value` / `status` | Reported coefficient and its precision/availability status. |
+
+## Practitioner-revalidation aggregate fields
+
+`data/v2/practitioner_revalidation_summary.csv` contains reported aggregate
+counts, not individual comparison-card responses. Blank numeric fields mean
+that the corresponding directional breakdown is unavailable; they must not be
+read as zero.
+
+| Field | Meaning |
+|---|---|
+| `comparison_condition` | Comparator presented against the refined V2 GA team: LLM, historical team, or uniform-objective GA. |
+| `comparison_cards` | Number of blinded cards retained for the condition. |
+| `refined_ga_preferred` | Cards on which the refined V2 GA team was preferred, when reported. |
+| `comparator_preferred` | Cards on which the comparator was preferred, when reported. |
+| `equivalent` | Cards reported as equivalent, when that three-way breakdown was available. |
+| `both_acceptable` | Cards on which both teams were judged acceptable, whether or not a slight preference remained. |
+| `slight_preference_both_acceptable` | Both-acceptable cards with a slight preference for one team. The public aggregate does not identify its direction. |
+| `no_meaningful_preference_both_acceptable` | Both-acceptable cards with no meaningful preference. |
+| `identical_composition_control` | Equivalence involving identical team composition, retained as a control rather than independent evidence. |
+| `evidence_level` | `reported_aggregate`; row-level cards, order, comments, and timing are not released. |
 
 ## V2 scalability input summaries
 

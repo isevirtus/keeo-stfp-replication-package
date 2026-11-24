@@ -11,7 +11,7 @@ correction and 30 from after it, with seeds 1–30 in each generator group.
 Both groups were rescored using corrected technical adequacy (AT) and compressed
 collaboration adequacy (AC). Team sizes range from four to nine. No GA was rerun
 for this sensitivity analysis. Do not merge this corpus with the separate
-12-project RQ3/RQ4 experiments or infer its candidate-pool size from identifiers.
+12-project RQ3 experiments or infer its candidate-pool size from identifiers.
 
 The 960 records contain 726 distinct project–team compositions. Repeated
 compositions are retained. Each composition has an opaque identifier scoped

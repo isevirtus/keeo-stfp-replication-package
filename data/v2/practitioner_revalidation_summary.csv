@@ -1,0 +1,4 @@
+comparison_condition,comparison_cards,refined_ga_preferred,comparator_preferred,equivalent,both_acceptable,slight_preference_both_acceptable,no_meaningful_preference_both_acceptable,identical_composition_control,evidence_level
+LLM,16,,,,14,11,3,0,reported_aggregate
+historical_team,12,3,7,2,,,,0,reported_aggregate
+uniform_GA,12,4,2,6,,,,1,reported_aggregate

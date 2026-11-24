@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.1 — 2026-11-24
+
+- Align the package title and citation metadata with the current manuscript.
+- Remap package evidence to the current three research questions: refinement,
+  revalidation, and aggregation sensitivity in RQ1; V1 evaluator fidelity and
+  runtime in RQ2; and all V2 GA/MILP search and certification evidence in RQ3.
+- Retain historical V1 GA/MILP and team-size records as evidence lineage rather
+  than presenting them as current research questions.
+- Add reported aggregate practitioner-revalidation data and document the absence
+  of row-level responses, prompts, raw LLM responses, and individual calibration
+  relations.
+- Add staffing-LLM and external-artifact provenance records with immutable commit
+  identifiers and SHA-256 checksums where available.
+- Preserve all previously released experimental values and analysis conventions.
+
 ## 1.3.0 — 2026-10-06
 
 - Add fixed-candidate aggregation sensitivity: 960 run-result records, 726

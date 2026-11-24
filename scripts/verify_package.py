@@ -145,6 +145,32 @@ def verify_v2() -> None:
     close(float(parameters["alpha"]["value"]), 0.5)
 
 
+def verify_practitioner_revalidation() -> None:
+    data = {
+        row["comparison_condition"]: row
+        for row in rows("data/v2/practitioner_revalidation_summary.csv")
+    }
+    assert set(data) == {"LLM", "historical_team", "uniform_GA"}
+    assert sum(int(row["comparison_cards"]) for row in data.values()) == 40
+    assert all(row["evidence_level"] == "reported_aggregate" for row in data.values())
+
+    llm = data["LLM"]
+    assert int(llm["comparison_cards"]) == 16
+    assert int(llm["both_acceptable"]) == 14
+    assert int(llm["slight_preference_both_acceptable"]) == 11
+    assert int(llm["no_meaningful_preference_both_acceptable"]) == 3
+    assert llm["refined_ga_preferred"] == llm["comparator_preferred"] == llm["equivalent"] == ""
+
+    historical = data["historical_team"]
+    assert tuple(int(historical[field]) for field in
+                 ("comparison_cards", "refined_ga_preferred", "comparator_preferred", "equivalent")) == (12, 3, 7, 2)
+
+    uniform = data["uniform_GA"]
+    assert tuple(int(uniform[field]) for field in
+                 ("comparison_cards", "refined_ga_preferred", "comparator_preferred", "equivalent")) == (12, 4, 2, 6)
+    assert int(uniform["identical_composition_control"]) == 1
+
+
 def verify_v2_scalability_artifacts() -> None:
     pools, summaries, by_k = analyze()
     def same(actual, expected):
@@ -241,6 +267,7 @@ def main() -> None:
     verify_rq3()
     verify_b0_scalability()
     verify_v2()
+    verify_practitioner_revalidation()
     verify_v2_scalability_artifacts()
     verify_evaluator_sensitivity()
     verify_deidentification()
